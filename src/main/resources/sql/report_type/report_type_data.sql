@@ -1,0 +1,11 @@
+INSERT INTO report_type (report_id, comment_id, post_id, template_id)
+VALUES (1, 1, NULL, NULL)
+     , (2, NULL, 4, NULL)
+     , (3, NULL, 5, NULL)
+     , (4, NULL, 3, NULL)
+     , (5, NULL, 4, NULL)
+     , (6, 7, NULL, NULL)
+     , (7, NULL, NULL, 2)
+     , (8, NULL, NULL, 4)
+     , (9, 3, NULL, NULL)
+     , (10, NULL, NULL, 5);
