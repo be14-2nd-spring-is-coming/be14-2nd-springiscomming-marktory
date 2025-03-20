@@ -492,16 +492,16 @@ VALUES
 # 회원별 프로필 사진
 INSERT INTO member_profile_image (member_id, url)
 VALUES
-(1, 'https://example.com/images/member1_profile.jpg'),
-(2, 'https://example.com/images/member2_profile.jpg'),
+(1, 'https://example.com/images/minseok.jpg'),
+(2, 'https://example.com/images/jihye.jpg'),
 (3, NULL),
-(4, 'https://example.com/images/member4_profile.jpg'),
-(5, 'https://example.com/images/member5_profile.jpg'),
+(4, 'https://example.com/images/seoyoung.jpg'),
+(5, NULL),
 (6, NULL),
-(7, 'https://example.com/images/member7_profile.jpg'),
-(8, 'https://example.com/images/member8_profile.jpg'),
+(7, 'https://example.com/images/junghoon.jpg'),
+(8, 'https://example.com/images/seojun.jpg'),
 (9, NULL),
-(10, 'https://example.com/images/member10_profile.jpg');
+(10, NULL);
 
 # 해시태그
 INSERT INTO hashtag (name) VALUES
