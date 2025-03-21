@@ -18,8 +18,8 @@
 | `title`      | VARCHAR(255)      | NO       | -       | 템플릿 제목 |
 | `content`    | LONGTEXT          | NO       | -       | 템플릿 내용 |
 | `visibility` | VARCHAR(255)      | NO       | 'public' | 공개 범위 (`public`, `private`, `subonly`) |
-| `written_date` | VARCHAR(255)    | NO       | -       | 작성 날짜 |
-| `delete_date` | VARCHAR(255)     | YES      | NULL    | 삭제 날짜 |
+| `written_date` | VARCHAR(255)    | NO       | -       | 작성 날짜 ('YYYY-MM-DD HH:MM:SS') |
+| `delete_date` | VARCHAR(255)     | YES      | NULL    | 삭제 날짜 ('YYYY-MM-DD HH:MM:SS') |
 | `usage_count` | INT               | NO       | 0       | 사용 횟수 |
 | `is_copy`    | CHAR(1)           | NO       | 'N'     | 복사 여부 (`Y`, `N`) |
 | `repository_id` | INT            | YES      | NULL    | 템플릿 저장소 ID (FK) |

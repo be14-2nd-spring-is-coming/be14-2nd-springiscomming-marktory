@@ -15,8 +15,8 @@
 | `id`           | INT AUTO_INCREMENT | NO       | -      | 기본 키 (게시글 ID) |
 | `title`        | VARCHAR(255)      | NO       | -      | 게시글 제목 |
 | `content`      | LONGTEXT          | NO       | -      | 게시글 내용 |
-| `written_date` | VARCHAR(255)    | NO       | -      | 작성 날짜 |
-| `delete_date`  | VARCHAR(255)     | YES      | NULL   | 삭제 날짜 |
+| `written_date` | VARCHAR(255)    | NO       | -      | 작성 날짜 ('YYYY-MM-DD HH:MM:SS') |
+| `delete_date`  | VARCHAR(255)     | YES      | NULL   | 삭제 날짜 ('YYYY-MM-DD HH:MM:SS') |
 | `visibility`   | VARCHAR(255)     | NO       | 'public' | 공개 상태 (`public`, `private`, `subonly`) |
 | `member_id`    | INT               | YES      | NULL   | 작성자 ID |
 | `category_id`  | INT               | YES      | NULL   | 카테고리 ID |

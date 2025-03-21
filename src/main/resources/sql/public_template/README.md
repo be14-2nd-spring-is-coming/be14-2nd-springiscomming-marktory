@@ -15,8 +15,8 @@
 | `id`        | INT AUTO_INCREMENT | NO       | -      | 템플릿 ID |
 | `title`     | VARCHAR(255)    | NO       | -      | 템플릿 제목 |
 | `content`   | LONGTEXT        | NO       | -      | 템플릿 내용 |
-| `written_date` | VARCHAR(255) | NO       | -      | 작성 날짜 |
-| `delete_date` | VARCHAR(255) | YES      | NULL   | 삭제 날짜 |
+| `written_date` | VARCHAR(255) | NO       | -      | 작성 날짜 ('YYYY-MM-DD HH:MM:SS') |
+| `delete_date` | VARCHAR(255) | YES      | NULL   | 삭제 날짜 ('YYYY-MM-DD HH:MM:SS') |
 | `usage_count` | INT           | NO       | 0      | 사용 횟수 |
 | `writer_id` | INT             | NO       | -      | 작성자 ID |
 

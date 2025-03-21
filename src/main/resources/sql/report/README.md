@@ -15,7 +15,7 @@
 | `id`        | INT AUTO_INCREMENT | NO       | -      | 신고 ID |
 | `content`   | VARCHAR(255)    | NO       | -      | 신고 내용 |
 | `status`    | BOOLEAN         | NO       | false  | 처리 여부 |
-| `date`      | VARCHAR(255)    | NO       | -      | 신고 날짜 |
+| `date`      | VARCHAR(255)    | NO       | -      | 신고 날짜 ('YYYY-MM-DD HH:MM:SS') |
 | `member_id` | INT             | NO       | -      | 신고자 ID |
 
 #### 🔗 관계 (Foreign Key)
