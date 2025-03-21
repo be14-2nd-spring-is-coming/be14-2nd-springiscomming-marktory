@@ -2,7 +2,8 @@ INSERT
     INTO comment
 (
     content, written_date, modify_date, is_deleted, type, above_id, member_id, post_id
-) VALUES
+)
+VALUES
 -- 기본 댓글
 ('좋은 정보 감사합니다! 😊', '2025-03-10 20:37:39', NULL, FALSE, 1, NULL, 2, 1),
 ('여행 체크리스트 유용하네요!✈️', '2025-03-11 13:50:13', NULL, FALSE, 1, NULL, 3, 2),
