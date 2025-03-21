@@ -11,5 +11,5 @@ CREATE TABLE post (
                       category_id INT,
                       CHECK ( visibility IN ('public', 'private', 'subonly')),
                       CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id),
-                      CONSTRAINT FOREIGN KEY (category_id) REFERENCES category(id)
+                      CONSTRAINT FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE SET NULL
 ) ENGINE = INNODB;
