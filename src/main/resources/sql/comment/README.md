@@ -14,8 +14,8 @@
 |----------------|-----------------|----------|--------|------|
 | `id`           | INT AUTO_INCREMENT | NO       | -      | 기본 키 (댓글 ID) |
 | `content`      | VARCHAR(255)      | NO       | -      | 댓글 내용 |
-| `written_date` | VARCHAR(255)    | NO       | -      | 작성 날짜 |
-| `modify_date`  | VARCHAR(255)     | YES      | NULL   | 수정 날짜 |
+| `written_date` | VARCHAR(255)    | NO       | -      | 작성 날짜 ('YYYY-MM-DD HH:MM:SS') |
+| `modify_date`  | VARCHAR(255)     | YES      | NULL   | 수정 날짜 ('YYYY-MM-DD HH:MM:SS') |
 | `is_deleted`   | BOOLEAN           | NO       | false  | 삭제 여부 |
 | `type`         | INT               | NO       | 1      | 댓글 유형 (1: 일반, 2: 대댓글) |
 | `above_id`     | INT               | YES      | NULL   | 상위 댓글 ID (대댓글일 경우) |

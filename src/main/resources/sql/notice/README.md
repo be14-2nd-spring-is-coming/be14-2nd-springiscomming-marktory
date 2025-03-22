@@ -13,7 +13,7 @@
 | 필드명         | 타입             | NULL 허용 | 기본값   | 설명 |
 |-------------|-----------------|----------|---------|------|
 | `id`        | INT AUTO_INCREMENT | NO       | -       | 공지사항 ID |
-| `date`      | VARCHAR(255)    | NO       | -       | 생성 날짜 |
+| `date`      | VARCHAR(255)    | NO       | -       | 생성 날짜 ('YYYY-MM-DD HH:MM:SS') |
 | `content`   | VARCHAR(255)    | NO       | -       | 공지 내용 |
 | `member_id` | INT             | YES      | NULL    | 작성자 ID |
 
