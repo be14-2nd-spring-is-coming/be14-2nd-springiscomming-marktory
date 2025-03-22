@@ -32,7 +32,7 @@ CREATE TABLE member (
                         assigned_date VARCHAR(255) NOT NULL,
                         delete_date VARCHAR(255),
                         report_count INT DEFAULT 0,
-                        is_terms BOOLEAN NOT NULL,
+                        is_terms BOOLEAN NOT NULL DEFAULT FALSE,
                         UNIQUE(email),
                         UNIQUE(nickname),
                         CHECK ( status in ('is_active', 'is_delete', 'is_black') )
@@ -91,7 +91,7 @@ CREATE TABLE template_space(
 CREATE TABLE public_template (
                                  id BIGINT PRIMARY KEY AUTO_INCREMENT,
                                  title VARCHAR(255) NOT NULL,
-                                 content VARCHAR(255) NOT NULL,
+                                 content LONGTEXT NOT NULL,
                                  written_date VARCHAR(255) NOT NULL,
                                  delete_date VARCHAR(255),
                                  usage_count INT NOT NULL DEFAULT 0,
@@ -101,7 +101,7 @@ CREATE TABLE public_template (
 CREATE TABLE member_template(
                                 id BIGINT PRIMARY KEY AUTO_INCREMENT,
                                 title VARCHAR(255) NOT NULL,
-                                content VARCHAR(255) NOT NULL,
+                                content LONGTEXT NOT NULL,
                                 visibility VARCHAR(255) NOT NULL DEFAULT 'public',
                                 written_date VARCHAR(255) NOT NULL,
                                 delete_date VARCHAR(255),
