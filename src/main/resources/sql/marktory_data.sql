@@ -20,7 +20,7 @@ DROP TABLE IF EXISTS member;
 # ---------------------------------------------------- 테이블 생성 ------------------------------------
 
 CREATE TABLE member (
-                        id LONG PRIMARY KEY AUTO_INCREMENT,
+                        id BIGINT PRIMARY KEY AUTO_INCREMENT,
                         email VARCHAR(255) NOT NULL,
                         password VARCHAR(255) NOT NULL,
                         name VARCHAR(255) NOT NULL,
@@ -39,10 +39,10 @@ CREATE TABLE member (
 ) ENGINE = INNODB;
 
 CREATE TABLE subscribe (
-                           id LONG PRIMARY KEY AUTO_INCREMENT,
+                           id BIGINT PRIMARY KEY AUTO_INCREMENT,
                            is_notification CHAR NOT NULL,
-                           subscriber_id LONG,
-                           subscribed_id LONG,
+                           subscriber_id BIGINT,
+                           subscribed_id BIGINT,
                            CHECK ( is_notification in ('Y', 'N') ),
                            CONSTRAINT FOREIGN KEY (subscriber_id) REFERENCES member(id),
                            CONSTRAINT FOREIGN KEY (subscribed_id) REFERENCES member(id),
@@ -50,56 +50,56 @@ CREATE TABLE subscribe (
 ) ENGINE = INNODB;
 
 CREATE TABLE member_profile_image (
-                                      member_id LONG PRIMARY KEY,
+                                      member_id BIGINT PRIMARY KEY,
                                       URL VARCHAR(255),
                                       CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id)
 ) ENGINE = INNODB;
 
 CREATE TABLE notice (
-                        id LONG PRIMARY KEY AUTO_INCREMENT,
+                        id BIGINT PRIMARY KEY AUTO_INCREMENT,
                         date VARCHAR(255) NOT NULL,
                         content VARCHAR(255) NOT NULL,
-                        member_id LONG,
+                        member_id BIGINT,
                         CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id)
 ) ENGINE = INNODB;
 
 CREATE TABLE authority (
-                           id LONG PRIMARY KEY AUTO_INCREMENT,
+                           id BIGINT PRIMARY KEY AUTO_INCREMENT,
                            name varchar(255) NOT NULL
 ) ENGINE = INNODB;
 
 CREATE TABLE member_roles(
-                             member_id LONG PRIMARY KEY,
-                             authority_id INT,
+                             member_id BIGINT PRIMARY KEY,
+                             authority_id BIGINT,
                              CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id),
                              CONSTRAINT FOREIGN KEY (authority_id) REFERENCES authority(id)
 ) ENGINE = INNODB;
 
 CREATE TABLE category (
-                          id LONG PRIMARY KEY AUTO_INCREMENT,
+                          id BIGINT PRIMARY KEY AUTO_INCREMENT,
                           name VARCHAR(255) NOT NULL,
-                          member_id LONG,
+                          member_id BIGINT,
                           CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id)
 ) ENGINE = INNODB;
 
 CREATE TABLE template_space(
-                               id LONG PRIMARY KEY AUTO_INCREMENT,
-                               member_id LONG NOT NULL,
+                               id BIGINT PRIMARY KEY AUTO_INCREMENT,
+                               member_id BIGINT NOT NULL,
                                CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id)
 ) ENGINE = INNODB;
 
 CREATE TABLE public_template (
-                                 id LONG PRIMARY KEY AUTO_INCREMENT,
+                                 id BIGINT PRIMARY KEY AUTO_INCREMENT,
                                  title VARCHAR(255) NOT NULL,
                                  content VARCHAR(255) NOT NULL,
                                  written_date VARCHAR(255) NOT NULL,
                                  delete_date VARCHAR(255),
-                                 usage_count LONG NOT NULL DEFAULT 0,
-                                 writer_id LONG NOT NULL
+                                 usage_count INT NOT NULL DEFAULT 0,
+                                 writer_id BIGINT NOT NULL
 ) ENGINE = INNODB;
 
 CREATE TABLE member_template(
-                                id LONG PRIMARY KEY AUTO_INCREMENT,
+                                id BIGINT PRIMARY KEY AUTO_INCREMENT,
                                 title VARCHAR(255) NOT NULL,
                                 content VARCHAR(255) NOT NULL,
                                 visibility VARCHAR(255) NOT NULL DEFAULT 'public',
@@ -107,68 +107,68 @@ CREATE TABLE member_template(
                                 delete_date VARCHAR(255),
                                 usage_count INT NOT NULL DEFAULT 0,
                                 is_copy CHAR NOT NULL DEFAULT 'N',
-                                repository_id LONG,
+                                repository_id BIGINT,
                                 CONSTRAINT FOREIGN KEY (repository_id) REFERENCES template_space(id),
                                 CHECK ( visibility IN ('public','private','subonly') ),
                                 CHECK ( is_copy IN ('Y','N'))
 ) ENGINE = INNODB;
 
 CREATE TABLE post (
-                      id LONG PRIMARY KEY AUTO_INCREMENT,
+                      id BIGINT PRIMARY KEY AUTO_INCREMENT,
                       title VARCHAR(255) NOT NULL,
                       content LONGTEXT NOT NULL,
                       written_date VARCHAR(255) NOT NULL,
                       delete_date VARCHAR(255),
                       visibility VARCHAR(255) NOT NULL DEFAULT 'public',
-                      member_id LONG,
-                      category_id LONG,
+                      member_id BIGINT,
+                      category_id BIGINT,
                       CHECK ( visibility IN ('public', 'private', 'subonly')),
                       CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id),
                       CONSTRAINT FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE SET NULL
 ) ENGINE = INNODB;
 
 CREATE TABLE hashtag (
-                         id LONG PRIMARY KEY AUTO_INCREMENT,
+                         id BIGINT PRIMARY KEY AUTO_INCREMENT,
                          name VARCHAR(255) NOT NULL
 ) ENGINE = INNODB;
 
 CREATE TABLE post_hashtag (
-                              post_id LONG NOT NULL,
-                              hashtag_id LONG NOT NULL,
+                              post_id BIGINT NOT NULL,
+                              hashtag_id BIGINT NOT NULL,
                               CONSTRAINT FOREIGN KEY (post_id) REFERENCES post(id),
                               CONSTRAINT FOREIGN KEY (hashtag_id) REFERENCES hashtag(id)
 ) ENGINE = INNODB;
 
 CREATE TABLE report (
-                        id LONG PRIMARY KEY AUTO_INCREMENT,
+                        id BIGINT PRIMARY KEY AUTO_INCREMENT,
                         content VARCHAR(255) NOT NULL,
                         status BOOLEAN NOT NULL DEFAULT FALSE,
                         date VARCHAR(255) NOT NULL,
-                        member_id LONG NOT NULL,
+                        member_id BIGINT NOT NULL,
                         CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id)
 ) ENGINE = INNODB;
 
 CREATE TABLE comment
 (
-    id           LONG PRIMARY KEY AUTO_INCREMENT,
+    id           BIGINT PRIMARY KEY AUTO_INCREMENT,
     content      VARCHAR(255) NOT NULL,
     written_date VARCHAR(255) NOT NULL,
     modify_date  VARCHAR(255),
     is_deleted   BOOLEAN NOT NULL DEFAULT false,
     type         INT NOT NULL DEFAULT 1,
-    above_id     LONG,
-    member_id      LONG,
-    post_id      LONG,
+    above_id     BIGINT,
+    member_id      BIGINT,
+    post_id      BIGINT,
     CHECK ( type IN (1, 2) ),
     CONSTRAINT FOREIGN KEY (member_id) REFERENCES member (id)
 ) ENGINE = INNODB;
 
 CREATE TABLE likes (
-                       id LONG PRIMARY KEY AUTO_INCREMENT,
+                       id BIGINT PRIMARY KEY AUTO_INCREMENT,
                        type VARCHAR(255) NOT NULL,
-                       post_id LONG,
-                       comment_id LONG,
-                       member_id LONG NOT NULL,
+                       post_id BIGINT,
+                       comment_id BIGINT,
+                       member_id BIGINT NOT NULL,
                        CONSTRAINT FOREIGN KEY (post_id) REFERENCES post(id),
                        CONSTRAINT FOREIGN KEY (comment_id) REFERENCES comment(id),
                        CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id),
@@ -177,11 +177,11 @@ CREATE TABLE likes (
 ) ENGINE = INNODB;
 
 CREATE TABLE report_type (
-                             id LONG PRIMARY KEY AUTO_INCREMENT,
-                             report_id LONG NOT NULL,
-                             comment_id LONG,
-                             post_id LONG,
-                             template_id LONG,
+                             id BIGINT PRIMARY KEY AUTO_INCREMENT,
+                             report_id BIGINT NOT NULL,
+                             comment_id BIGINT,
+                             post_id BIGINT,
+                             template_id BIGINT,
                              CONSTRAINT FOREIGN KEY (report_id) REFERENCES report(id),
                              CONSTRAINT FOREIGN KEY (comment_id) REFERENCES comment(id),
                              CONSTRAINT FOREIGN KEY (post_id) REFERENCES post(id),
