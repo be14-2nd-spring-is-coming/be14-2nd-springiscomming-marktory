@@ -1,19 +1,22 @@
-SELECT
-    *
-    FROM member
-  WHERE id = 2;
-
 # 닉네임 변경
 UPDATE member
-    SET nickname = '서준의박물관'
-  WHERE id = 2;
+    SET nickname = ?
+  WHERE id = ?;
 
 # 비밀번호 변경
 UPDATE member
-    SET password = '123456789@@'
-  WHERE id = 2;
+    SET password = ?
+  WHERE id = ?;
 
 # 프로필 이미지 변경
 UPDATE member
-    SET image = 'https://example.com/images/cute_dog.jpg'
-  WHERE id = 2;
+    SET image = ?
+  WHERE id = ?;
+
+# 한 번에 받기
+UPDATE member
+    SET nickname = ?,
+        password = ?,
+        image = ?
+  WHERE id = ?;
+# -> 동적 쿼리 필요
