@@ -20,102 +20,88 @@ DROP TABLE IF EXISTS member;
 # ---------------------------------------------------- 테이블 생성 ------------------------------------
 
 CREATE TABLE member (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    email VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    nickname VARCHAR(255) NOT NULL,
-    birthday VARCHAR(255) NOT NULL,
-    image VARCHAR(255),
-    status VARCHAR(255) NOT NULL DEFAULT 'is_active',
-    black_date VARCHAR(255),
-    assigned_date VARCHAR(255) NOT NULL,
-    delete_date VARCHAR(255),
-    report_count INT DEFAULT 0,
-    is_terms BOOLEAN NOT NULL,
-    UNIQUE(email),
-    UNIQUE(nickname),
-    CHECK ( status in ('is_active', 'is_delete', 'is_black') )
+                        id INT PRIMARY KEY AUTO_INCREMENT,
+                        email VARCHAR(255) NOT NULL,
+                        password VARCHAR(255) NOT NULL,
+                        name VARCHAR(255) NOT NULL,
+                        nickname VARCHAR(255) NOT NULL,
+                        birthday VARCHAR(255) NOT NULL,
+                        image VARCHAR(255),
+                        status VARCHAR(255) NOT NULL DEFAULT 'is_active',
+                        black_date VARCHAR(255),
+                        assigned_date VARCHAR(255) NOT NULL,
+                        delete_date VARCHAR(255),
+                        report_count INT DEFAULT 0,
+                        is_terms BOOLEAN NOT NULL,
+                        UNIQUE(email),
+                        UNIQUE(nickname),
+                        CHECK ( status in ('is_active', 'is_delete', 'is_black') )
 ) ENGINE = INNODB;
 
 CREATE TABLE subscribe (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    is_notification CHAR NOT NULL,
-    subscriber_id INT,
-    subscribed_id INT,
-    CHECK ( is_notification in ('Y', 'N') ),
-    CONSTRAINT FOREIGN KEY (subscriber_id) REFERENCES member(id),
-    CONSTRAINT FOREIGN KEY (subscribed_id) REFERENCES member(id),
-    UNIQUE(subscriber_id, subscribed_id)
+                           id INT PRIMARY KEY AUTO_INCREMENT,
+                           is_notification CHAR NOT NULL,
+                           subscriber_id INT,
+                           subscribed_id INT,
+                           CHECK ( is_notification in ('Y', 'N') ),
+                           CONSTRAINT FOREIGN KEY (subscriber_id) REFERENCES member(id),
+                           CONSTRAINT FOREIGN KEY (subscribed_id) REFERENCES member(id),
+                           UNIQUE(subscriber_id, subscribed_id)
 ) ENGINE = INNODB;
 
 CREATE TABLE member_profile_image (
-<<<<<<< HEAD
                                       member_id INT PRIMARY KEY,
                                       URL VARCHAR(255),
                                       CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id)
-=======
-    member_id INT PRIMARY KEY,
-    URL VARCHAR(255),
-    CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id)
->>>>>>> develop
 ) ENGINE = INNODB;
 
 CREATE TABLE notice (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    date VARCHAR(255) NOT NULL,
-    content VARCHAR(255) NOT NULL,
-    member_id INT,
-    CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id)
+                        id INT PRIMARY KEY AUTO_INCREMENT,
+                        date VARCHAR(255) NOT NULL,
+                        content VARCHAR(255) NOT NULL,
+                        member_id INT,
+                        CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id)
 ) ENGINE = INNODB;
 
 CREATE TABLE authority (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name varchar(255) NOT NULL
+                           id INT PRIMARY KEY AUTO_INCREMENT,
+                           name varchar(255) NOT NULL
 ) ENGINE = INNODB;
 
 CREATE TABLE member_roles(
-<<<<<<< HEAD
                              member_id INT PRIMARY KEY,
                              authority_id INT,
                              CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id),
                              CONSTRAINT FOREIGN KEY (authority_id) REFERENCES authority(id)
-=======
-    member_id INT PRIMARY KEY,
-    authority_id INT,
-    CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id),
-    CONSTRAINT FOREIGN KEY (authority_id) REFERENCES authority(id)
->>>>>>> develop
 ) ENGINE = INNODB;
 
 CREATE TABLE category (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
-    member_id INT,
-    CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id)
+                          id INT PRIMARY KEY AUTO_INCREMENT,
+                          name VARCHAR(255) NOT NULL,
+                          member_id INT,
+                          CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id)
 ) ENGINE = INNODB;
 
 CREATE TABLE template_space(
-    id INT PRIMARY KEY AUTO_INCREMENT,
-   member_id INT NOT NULL,
-   CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id)
+                               id INT PRIMARY KEY AUTO_INCREMENT,
+                               member_id INT NOT NULL,
+                               CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id)
 ) ENGINE = INNODB;
 
 CREATE TABLE public_template (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    title VARCHAR(255) NOT NULL,
-    content VARCHAR(255) NOT NULL,
-    written_date VARCHAR(255) NOT NULL,
-    delete_date VARCHAR(255),
-    usage_count INT NOT NULL DEFAULT 0,
-    writer_id INT NOT NULL
+                                 id INT PRIMARY KEY AUTO_INCREMENT,
+                                 title VARCHAR(255) NOT NULL,
+                                 content VARCHAR(255) NOT NULL,
+                                 written_date VARCHAR(255) NOT NULL,
+                                 delete_date VARCHAR(255),
+                                 usage_count INT NOT NULL DEFAULT 0,
+                                 writer_id INT NOT NULL
 ) ENGINE = INNODB;
 
 CREATE TABLE member_template(
-<<<<<<< HEAD
                                 id INT PRIMARY KEY AUTO_INCREMENT,
                                 title VARCHAR(255) NOT NULL,
-                                content VARCHAR(255) NOT NULL,
+                                content LONGTEXT,
                                 visibility VARCHAR(255) NOT NULL DEFAULT 'public',
                                 written_date VARCHAR(255) NOT NULL,
                                 delete_date VARCHAR(255),
@@ -139,55 +125,27 @@ CREATE TABLE post (
                       CHECK ( visibility IN ('public', 'private', 'subonly')),
                       CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id),
                       CONSTRAINT FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE SET NULL
-=======
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    title VARCHAR(255) NOT NULL,
-    content VARCHAR(255) NOT NULL,
-    visibility VARCHAR(255) NOT NULL DEFAULT 'public',
-    written_date VARCHAR(255) NOT NULL,
-    delete_date VARCHAR(255),
-    usage_count INT NOT NULL DEFAULT 0,
-    is_copy CHAR NOT NULL DEFAULT 'N',
-    repository_id INT,
-    CONSTRAINT FOREIGN KEY (repository_id) REFERENCES template_space(id),
-    CHECK ( visibility IN ('public','private','subonly') ),
-    CHECK ( is_copy IN ('Y','N'))
-) ENGINE = INNODB;
-
-CREATE TABLE post (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    title VARCHAR(255) NOT NULL,
-    content LONGTEXT NOT NULL,
-    written_date VARCHAR(255) NOT NULL,
-    delete_date VARCHAR(255),
-    visibility VARCHAR(255) NOT NULL DEFAULT 'public',
-    member_id INT,
-    category_id INT,
-    CHECK ( visibility IN ('public', 'private', 'subonly')),
-    CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id),
-    CONSTRAINT FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE SET NULL
->>>>>>> develop
 ) ENGINE = INNODB;
 
 CREATE TABLE hashtag (
-     id INT PRIMARY KEY AUTO_INCREMENT,
-     name VARCHAR(255) NOT NULL
+                         id INT PRIMARY KEY AUTO_INCREMENT,
+                         name VARCHAR(255) NOT NULL
 ) ENGINE = INNODB;
 
 CREATE TABLE post_hashtag (
-    post_id INT NOT NULL,
-    hashtag_id INT NOT NULL,
-    CONSTRAINT FOREIGN KEY (post_id) REFERENCES post(id),
-    CONSTRAINT FOREIGN KEY (hashtag_id) REFERENCES hashtag(id)
+                              post_id INT NOT NULL,
+                              hashtag_id INT NOT NULL,
+                              CONSTRAINT FOREIGN KEY (post_id) REFERENCES post(id),
+                              CONSTRAINT FOREIGN KEY (hashtag_id) REFERENCES hashtag(id)
 ) ENGINE = INNODB;
 
 CREATE TABLE report (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    content VARCHAR(255) NOT NULL,
-    status BOOLEAN NOT NULL DEFAULT FALSE,
-    date VARCHAR(255) NOT NULL,
-    member_id INT NOT NULL,
-    CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id)
+                        id INT PRIMARY KEY AUTO_INCREMENT,
+                        content VARCHAR(255) NOT NULL,
+                        status BOOLEAN NOT NULL DEFAULT FALSE,
+                        date VARCHAR(255) NOT NULL,
+                        member_id INT NOT NULL,
+                        CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id)
 ) ENGINE = INNODB;
 
 CREATE TABLE comment
@@ -206,7 +164,6 @@ CREATE TABLE comment
 ) ENGINE = INNODB;
 
 CREATE TABLE likes (
-<<<<<<< HEAD
                        id INT PRIMARY KEY AUTO_INCREMENT,
                        type VARCHAR(255) NOT NULL,
                        post_id INT,
@@ -229,30 +186,6 @@ CREATE TABLE report_type (
                              CONSTRAINT FOREIGN KEY (comment_id) REFERENCES comment(id),
                              CONSTRAINT FOREIGN KEY (post_id) REFERENCES post(id),
                              CONSTRAINT FOREIGN KEY (template_id) REFERENCES member_template(id)
-=======
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    type VARCHAR(255) NOT NULL,
-    post_id INT,
-    comment_id INT,
-    member_id INT NOT NULL,
-    CONSTRAINT FOREIGN KEY (post_id) REFERENCES post(id),
-    CONSTRAINT FOREIGN KEY (comment_id) REFERENCES comment(id),
-    CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id),
-    UNIQUE (member_id, post_id, type),
-    UNIQUE (member_id, comment_id, type)
-) ENGINE = INNODB;
-
-CREATE TABLE report_type (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    report_id INT NOT NULL,
-    comment_id INT,
-    post_id INT,
-    template_id INT,
-    CONSTRAINT FOREIGN KEY (report_id) REFERENCES report(id),
-    CONSTRAINT FOREIGN KEY (comment_id) REFERENCES comment(id),
-    CONSTRAINT FOREIGN KEY (post_id) REFERENCES post(id),
-    CONSTRAINT FOREIGN KEY (template_id) REFERENCES member_template(id)
->>>>>>> develop
 ) ENGINE = INNODB;
 
 
@@ -319,7 +252,6 @@ VALUES
 ( '파이썬 기초 문법 정리'
 , '# 🐍 파이썬 기초 문법\n\n## 1. 변수 선언\n```python\nx = 10\ny = "hello"\n```\n변수는 위와 같이 선언할 수 있습니다.\n\n![파이썬 로고](https://example.com/images/python-logo.png)'
 , '2024-03-01 00:30:52', NULL, 'public', 1, 1)
-<<<<<<< HEAD
      , ( '여행 준비 체크리스트 ✈️'
        , '# ✈️ 여행 준비 체크리스트\n\n여행을 떠나기 전, 다음 리스트를 꼭 확인하세요!\n\n- [x] 여권 챙기기\n- [x] 항공권 예매 확인\n- [x] 호텔 예약 완료\n\n![여행 이미지](https://example.com/images/travel-checklist.jpg)'
        , '2024-03-02 06:36:42', NULL, 'public', 2, 2)
@@ -353,41 +285,6 @@ INSERT
 INTO comment
 (
   content, written_date, modify_date, is_deleted, type, above_id, member_id, post_id
-=======
-, ( '여행 준비 체크리스트 ✈️'
-, '# ✈️ 여행 준비 체크리스트\n\n여행을 떠나기 전, 다음 리스트를 꼭 확인하세요!\n\n- [x] 여권 챙기기\n- [x] 항공권 예매 확인\n- [x] 호텔 예약 완료\n\n![여행 이미지](https://example.com/images/travel-checklist.jpg)'
-, '2024-03-02 06:36:42', NULL, 'public', 2, 2)
-, ( '초보자를 위한 헬스 가이드 💪'
-, '# 💪 헬스 초보자 가이드\n\n## 1. 운동 루틴\n```\n월: 가슴 + 삼두\n화: 등 + 이두\n수: 하체\n```\n### 2. 기본적인 식단\n- 단백질 섭취 증가\n- 탄수화물 적절히 조절\n\n![운동 이미지](https://example.com/images/fitness-guide.jpg)'
-, '2024-03-03 03:36:26', NULL, 'public', 3, 3)
-, ( 'Django vs FastAPI 비교 분석 🆚'
-, '# 🆚 Django vs FastAPI\n\n| 프레임워크 | 속도 | 유연성 | 커뮤니티 |\n|-----------|------|------|------|\n| Django    | 중간 | 낮음  | 큼  |\n| FastAPI   | 빠름 | 높음  | 작음  |\n\nDjango와 FastAPI의 차이점을 비교하고 장단점을 분석해보았습니다.\n\n![Django vs FastAPI](https://example.com/images/django-fastapi.jpg)'
-, '2024-03-04 02:37:54', NULL, 'public', 1, 1)
-, ( '서울 핫플 카페 추천 ☕'
-, '# ☕ 서울 핫플 카페 추천\n\n요즘 뜨는 감성 카페를 소개합니다!\n\n1️⃣ **블루보틀 성수** - 미니멀한 인테리어와 퀄리티 높은 커피 ☕\n2️⃣ **펠트 커피** - 직접 로스팅한 원두의 깊은 맛\n\n![카페 이미지](https://example.com/images/seoul-cafes.jpg)'
-, '2024-03-05 19:13:27', NULL, 'public', 2, 2)
-, ( '운동 루틴 공유 (삭제됨)'
-, '# 🏋️ 운동 루틴 공유\n\n### 저의 개인 운동 루틴\n\n```\n월: 가슴, 삼두\n화: 등, 이두\n수: 하체\n목: 어깨\n금: 코어\n```\n\n운동을 함께 해봐요! 💪\n\n![운동 이미지](https://example.com/images/workout.jpg)'
-, '2024-03-06 01:29:03', '2025-03-10 10:29:44', 'public', 3, 3)
-, ( '개발자 포트폴리오 만들기 📁'
-, '# 📁 개발자 포트폴리오 가이드\n\n## 1. 필수 포함 항목\n- 프로젝트 소개\n- 기술 스택\n- 경험 및 성과\n\n**Tip**: 깃허브 링크와 블로그를 포함하면 좋아요! 👍\n\n![포트폴리오 예시](https://example.com/images/portfolio-guide.jpg)'
-, '2024-03-07 09:25:42', NULL, 'private', 1, 1)
-, ( '부산 맛집 투어 🍜'
-, '# 🍜 부산 맛집 투어\n\n부산에서 꼭 가봐야 할 맛집 리스트!\n\n📌 **돼지국밥** - 삼진국밥\n📌 **밀면** - 할매밀면\n📌 **회** - 자갈치시장\n\n![부산 맛집](https://example.com/images/busan-food.jpg)'
-, '2024-03-08 04:01:18', NULL, 'subonly', 2, 2)
-, ( 'AI 트렌드 분석 🤖'
-, '# 🤖 최신 AI 트렌드\n\n최근 AI 업계에서 주목할만한 기술과 흐름을 분석합니다.\n\n- OpenAI GPT-5 출시 예정?\n- Stable Diffusion 3.0, 새로운 이미지 생성 기술\n- 기업들이 AI 도입에 집중하는 이유\n\n![AI 트렌드](https://example.com/images/ai-trends.jpg)'
-, '2024-03-09 09:59:55', NULL, 'public', 1, 1)
-, ( '등산 초보자를 위한 코스 추천 🏔️'
-, '# 🏔️ 등산 초보자 추천 코스\n\n### 가볍게 등산할 수 있는 코스\n1️⃣ 북한산 둘레길\n2️⃣ 남산 둘레길\n3️⃣ 인왕산 정상까지 트레킹\n\n![등산 이미지](https://example.com/images/hiking-course.jpg)'
-, '2024-03-10 04:16:58', NULL, 'public', 3, 3);
-
-# 댓글
-INSERT
-    INTO comment
-(
-    content, written_date, modify_date, is_deleted, type, above_id, member_id, post_id
->>>>>>> develop
 ) VALUES
 -- 기본 댓글
 ('좋은 정보 감사합니다! 😊', '2024-03-10 20:37:39', NULL, FALSE, 1, NULL, 2, 1),
@@ -407,11 +304,7 @@ INSERT
 
 # 좋아요
 INSERT
-<<<<<<< HEAD
 INTO likes
-=======
-    INTO likes
->>>>>>> develop
 (type, post_id, comment_id, member_id)
 VALUES
 -- 게시글 좋아요
@@ -481,30 +374,6 @@ VALUES
 ('허위 정보를 유포한 게시글입니다.', TRUE, '2024-07-28 14:15:45', 4),  #2
 ('허위 정보를 유포한 게시글입니다.', TRUE, '2024-07-28 21:40:10', 3);  #1
 
-<<<<<<< HEAD
-=======
-# 신고별 구분
-INSERT
-    INTO report_type
-(report_id, comment_id, post_id, template_id)
-VALUES
-    (1, NULL, 1, NULL),
-    (2, NULL, 2, NULL),
-    (3, NULL, 2, NULL),
-    (4, NULL, 3, NULL),
-    (5, NULL, 4, NULL),
-    (6, NULL, 6, NULL),
-    (7, 3, NULL, NULL),
-    (8, 4, NULL, NULL),
-    (9, 5, NULL, NULL),
-    (10, NULL, NULL, 5),
-    (11, NULL, NULL, 6),
-    (12, NULL, NULL, 2),
-    (13, NULL, NULL, 3),
-    (14, NULL, NULL, 1),
-    (15, NULL, NULL, 10),
-    (16, NULL, NULL, 9);
->>>>>>> develop
 
 # 공지사항
 INSERT
@@ -567,7 +436,6 @@ VALUES
 ('스마트폰 사진 잘 찍는 법', '# 📸 핸드폰 사진 강의\n\n- **노출 조절하기**', 'subonly', '2024-04-23 19:30:25', NULL, 3, 'N', 8),
 ('유튜브 시작하기', '# 🎬 유튜브 채널 운영 가이드\n\n- **콘텐츠 기획법**', 'private', '2024-04-25 21:05:40', NULL, 7, 'N', 9),
 ('여행 경비 절약 팁', '# 🌍 저렴하게 여행하는 법\n\n- **LCC 항공권 활용하기**', 'subonly', '2024-04-28 22:55:50', NULL, 4, 'N', 10);
-<<<<<<< HEAD
 
 # 신고별 구분
 INSERT
@@ -590,8 +458,6 @@ VALUES
 (14, NULL, NULL, 1),
 (15, NULL, NULL, 10),
 (16, NULL, NULL, 9);
-=======
->>>>>>> develop
 
 # 회원별 프로필 사진
 INSERT
