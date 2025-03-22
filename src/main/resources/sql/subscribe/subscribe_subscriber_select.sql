@@ -1,6 +1,6 @@
 # 구독자 목록의 회원 정보 가져오기
 SELECT
-    member.id, email, name, image
-FROM member
-         JOIN subscribe ON (subscribe.subscriber_id = member.id)
+    m.id, email, name, image
+FROM member m
+         JOIN subscribe s ON (s.subscriber_id = m.id)
 WHERE subscribed_id = ?;
