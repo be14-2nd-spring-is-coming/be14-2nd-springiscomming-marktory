@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sic.marktory.subscribe.query.mapper.SubscribeMapper">
+
+    <!-- 내가 구독한 회원들 조회 -->
+    <select id="findSubscribedMembers" resultType="com.sic.marktory.subscribe.query.dto.MemberDTO">
+        SELECT
+            m.id AS id,
+            m.email,
+            m.nickname,
+            m.image
+        FROM subscribe s
+                 JOIN member m ON s.subscribed_id = m.id
+        WHERE s.subscriber_id = #{memberId};
+    </select>
+
+    <!-- 나를 구독한 회원들 조회 -->
+    <select id="findSubscriberMembers" resultType="com.sic.marktory.subscribe.query.dto.MemberDTO">
+        SELECT
+            m.id AS id,
+            m.email,
+            m.nickname,
+            m.image
+        FROM subscribe s
+                 JOIN member m ON s.subscriber_id = m.id
+        WHERE s.subscribed_id = #{memberId};
+    </select>
+
+</mapper>
