@@ -9,7 +9,7 @@ CREATE TABLE comment
     is_deleted   BOOLEAN NOT NULL DEFAULT false,
     type         INT NOT NULL DEFAULT 1,
     above_id     INT,
-    member_id      INT,
+    member_id    INT,
     post_id      INT,
     CHECK ( type IN (1, 2) ),
     CONSTRAINT FOREIGN KEY (member_id) REFERENCES member (id)
