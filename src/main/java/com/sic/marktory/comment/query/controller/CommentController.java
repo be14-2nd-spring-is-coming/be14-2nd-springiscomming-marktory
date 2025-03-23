@@ -21,12 +21,12 @@ public class CommentController {
 
     @GetMapping("/getComments/{postId}")
     public List<CommentDTO> getComments(@PathVariable Long postId) {
-        return commentService.getCommentsByPostId(postId);
+        return commentService.findCommentsByPostId(postId);
     }
 
     @GetMapping("/getReplyComments/{aboveId}")
     public List<CommentDTO> getReplyComments(@PathVariable Long aboveId) {
-        return commentService.getReplyCommentsByAboveId(aboveId);
+        return commentService.findReplyCommentsByAboveId(aboveId);
     }
 
 }

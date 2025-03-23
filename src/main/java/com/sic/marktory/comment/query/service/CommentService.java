@@ -16,11 +16,11 @@ public class CommentService {
         this.commentMapper = commentMapper;
     }
 
-    public List<CommentDTO> getCommentsByPostId(Long postId) {
+    public List<CommentDTO> findCommentsByPostId(Long postId) {
         return commentMapper.selectCommentsByPostId(postId);
     }
 
-    public List<CommentDTO> getReplyCommentsByAboveId(Long aboveId) {
+    public List<CommentDTO> findReplyCommentsByAboveId(Long aboveId) {
         return commentMapper.selectReplyCommentsByAboveId(aboveId);
     }
 
