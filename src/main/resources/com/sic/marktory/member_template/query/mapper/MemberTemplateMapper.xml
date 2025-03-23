@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sic.marktory.member_template.query.mapper.MemberTemplateMapper">
+    <resultMap type="com.sic.marktory.member_template.query.dto.MemberTemplateDTO" id="memberTemplateResultMap">
+        <id property="id" column="id" />
+        <result property="title" column="TITLE"/>
+        <result property="content" column="CONTENT"/>
+        <result property="visibility" column="VISIBILITY"/>
+        <result property="writtenDate" column="WRITTEN_DATE"/>
+        <result property="deleteDate" column="DELETE_DATE"/>
+        <result property="usageCount" column="USAGE_COUNT"/>
+        <result property="isCopy" column="IS_COPY"/>
+        <result property="repositoryId" column="REPOSITORY_ID"/>
+    </resultMap>
+    <select id="selectMemberTemplatePublicAll" resultMap="memberTemplateResultMap">
+        SELECT
+               id
+             , title
+             , content
+             , visibility
+             , written_date
+             , delete_date
+             , usage_count
+             , is_copy
+             , repository_id
+        FROM member_template
+        WHERE visibility = 'public';
+    </select>
+</mapper>
