@@ -16,12 +16,12 @@ public class SubscribeServiceImpl implements SubscribeService {
     }
 
     @Override
-    public List<MemberDTO> getSubscribedMembers(Long memberId) {
-        return subscribeMapper.findSubscribedMembers(memberId);
+    public List<MemberDTO> findSubscribedMembers(Long memberId) {
+        return subscribeMapper.selectSubscribedMembers(memberId);
     }
 
     @Override
-    public List<MemberDTO> getSubscriberMembers(Long memberId) {
-        return subscribeMapper.findSubscriberMembers(memberId);
+    public List<MemberDTO> findSubscriberMembers(Long memberId) {
+        return subscribeMapper.selectSubscriberMembers(memberId);
     }
 }

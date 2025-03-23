@@ -22,13 +22,13 @@ public class SubscribeController {
 
     // 내가 구독한 회원들 조회
     @GetMapping("/subscriber/{memberId}")
-    public List<MemberDTO> getSubscribed(@PathVariable("memberId") Long memberId){
-        return subscribeService.getSubscribedMembers(memberId);
+    public List<MemberDTO> getSubscribedMembers(@PathVariable("memberId") Long memberId){
+        return subscribeService.findSubscribedMembers(memberId);
     }
 
     // 나를 구독한 회원들 조회
     @GetMapping("/subscribed/{memberId}")
-    public List<MemberDTO> getSubscriber(@PathVariable("memberId") Long memberId){
-        return subscribeService.getSubscriberMembers(memberId);
+    public List<MemberDTO> getSubscriberMembers(@PathVariable("memberId") Long memberId){
+        return subscribeService.findSubscriberMembers(memberId);
     }
 }

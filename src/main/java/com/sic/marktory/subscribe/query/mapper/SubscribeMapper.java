@@ -11,8 +11,8 @@ import java.util.List;
 public interface SubscribeMapper {
 
     // 내가 구독한 회원들 조회 (memberId가 구독한 목록)
-    List<MemberDTO> findSubscribedMembers(@Param("memberId") Long memberId);
+    List<MemberDTO> selectSubscribedMembers(@Param("memberId") Long memberId);
 
     // 나를 구독한 회원들 조회 (memberId를 구독하는 목록)
-    List<MemberDTO> findSubscriberMembers(@Param("memberId") Long memberId);
+    List<MemberDTO> selectSubscriberMembers(@Param("memberId") Long memberId);
 }

@@ -5,7 +5,7 @@
 <mapper namespace="com.sic.marktory.subscribe.query.mapper.SubscribeMapper">
 
     <!-- 내가 구독한 회원들 조회 -->
-    <select id="findSubscribedMembers" resultType="com.sic.marktory.subscribe.query.dto.MemberDTO">
+    <select id="selectSubscribedMembers" resultType="com.sic.marktory.subscribe.query.dto.MemberDTO">
         SELECT
             m.id AS id,
             m.email,
@@ -17,7 +17,7 @@
     </select>
 
     <!-- 나를 구독한 회원들 조회 -->
-    <select id="findSubscriberMembers" resultType="com.sic.marktory.subscribe.query.dto.MemberDTO">
+    <select id="selectSubscriberMembers" resultType="com.sic.marktory.subscribe.query.dto.MemberDTO">
         SELECT
             m.id AS id,
             m.email,
