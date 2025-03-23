@@ -11,4 +11,4 @@ SELECT
      , mt.repository_id
 FROM member_template mt
 JOIN member m ON  m.id = mt.repository_id
-WHERE visibility = 'public' AND m.id = ?;
+WHERE visibility = 'private' AND m.id = ?;
