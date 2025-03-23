@@ -14,6 +14,7 @@
         <result property="isCopy" column="IS_COPY"/>
         <result property="repositoryId" column="REPOSITORY_ID"/>
     </resultMap>
+
     <select id="selectMemberTemplatePublicAll" resultMap="memberTemplateResultMap">
         SELECT
                id
@@ -28,4 +29,5 @@
         FROM member_template
         WHERE visibility = 'public';
     </select>
+
 </mapper>
