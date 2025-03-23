@@ -1,5 +1,4 @@
 # ---------------------------------------------------- 테이블 삭제 ------------------------------------
-DROP TABLE IF EXISTS report_type;
 DROP TABLE IF EXISTS likes;
 DROP TABLE IF EXISTS report;
 DROP TABLE IF EXISTS comment;
@@ -137,16 +136,9 @@ CREATE TABLE post_hashtag (
                               hashtag_id BIGINT NOT NULL,
                               CONSTRAINT FOREIGN KEY (post_id) REFERENCES post(id),
                               CONSTRAINT FOREIGN KEY (hashtag_id) REFERENCES hashtag(id)
+
 ) ENGINE = INNODB;
 
-CREATE TABLE report (
-                        id BIGINT PRIMARY KEY AUTO_INCREMENT,
-                        content VARCHAR(255) NOT NULL,
-                        status BOOLEAN NOT NULL DEFAULT FALSE,
-                        date VARCHAR(255) NOT NULL,
-                        member_id BIGINT NOT NULL,
-                        CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id)
-) ENGINE = INNODB;
 
 CREATE TABLE comment
 (
@@ -176,16 +168,23 @@ CREATE TABLE likes (
                        UNIQUE (member_id, comment_id, type)
 ) ENGINE = INNODB;
 
-CREATE TABLE report_type (
-                             id BIGINT PRIMARY KEY AUTO_INCREMENT,
-                             report_id BIGINT NOT NULL,
-                             comment_id BIGINT,
-                             post_id BIGINT,
-                             template_id BIGINT,
-                             CONSTRAINT FOREIGN KEY (report_id) REFERENCES report(id),
-                             CONSTRAINT FOREIGN KEY (comment_id) REFERENCES comment(id),
-                             CONSTRAINT FOREIGN KEY (post_id) REFERENCES post(id),
-                             CONSTRAINT FOREIGN KEY (template_id) REFERENCES member_template(id)
+#신고
+CREATE TABLE report (
+                        id BIGINT PRIMARY KEY AUTO_INCREMENT,
+                        content VARCHAR(255) NOT NULL,
+                        status BOOLEAN NOT NULL DEFAULT FALSE,
+                        date VARCHAR(255) NOT NULL,
+                        type VARCHAR(255) NOT NULL,
+                        member_id BIGINT NOT NULL,
+                        comment_id BIGINT,
+                        post_id BIGINT,
+                        template_id BIGINT,
+                        CONSTRAINT FOREIGN KEY (member_id) REFERENCES member(id),
+                        CHECK ( type in ('comment','post','template') ),
+                        CONSTRAINT FOREIGN KEY (comment_id) REFERENCES comment(id),
+                        CONSTRAINT FOREIGN KEY (post_id) REFERENCES post(id),
+                        CONSTRAINT FOREIGN KEY (template_id) REFERENCES member_template(id)
+
 ) ENGINE = INNODB;
 
 
@@ -290,7 +289,7 @@ INTO comment
 ('좋은 정보 감사합니다! 😊', '2024-03-10 20:37:39', NULL, FALSE, 1, NULL, 2, 1),
 ('여행 체크리스트 유용하네요!✈️', '2024-03-11 13:50:13', NULL, FALSE, 1, NULL, 3, 2),
 ('운동 루틴 공유해주셔서 감사합니다!💪', '2024-03-12 17:13:45', NULL, FALSE, 1, NULL, 4, 3),
-('완전 못쓴다 ㅋㅋ', '2024-03-19', NULL, FALSE, 1, NULL, 3, 5),
+('완전 못쓴다 ㅋㅋ', '2024-03-19 17:12:56', NULL, FALSE, 1, NULL, 3, 5),
 
 -- 대댓글 (위 댓글에 대한 답변)
 ('진짜 ㅋㅋ 우웩', '2024-03-13 10:03:03', NULL, FALSE, 2, 1, 3, 1),
@@ -351,28 +350,6 @@ VALUES
     ('사진 촬영 기초', '# 📷 DSLR 초보자를 위한 가이드\n\n- **셔터 스피드**', '2024-03-27 12:10:35', NULL, 4, 8),
     ('건강한 식습관', '# 🥗 건강한 식습관 가이드\n\n- **아침: 단백질 + 탄수화물 섭취**', '2024-03-30 20:15:20', NULL, 3, 9),
     ('자취생을 위한 간편 요리', '# 🍳 간단한 자취 요리 레시피\n\n### ✅ 참치마요 덮밥', '2024-04-01 22:05:10', NULL, 6, 10);
-
-# 신고
-INSERT
-INTO report
-(content, status, date, member_id)
-VALUES
-    ('허위 정보를 유포한 템플릿입니다.', TRUE, '2024-07-11 10:15:30', 4),  #16
-    ('허위 정보를 유포한 템플릿입니다.', TRUE, '2024-07-12 12:30:45', 3),  #15
-    ('허위 정보를 유포한 템플릿입니다.', TRUE, '2024-07-13 14:05:20', 2),  #14
-    ('허위 정보를 유포한 템플릿입니다.', TRUE, '2024-07-14 09:45:10', 5),  #13
-    ('허위 정보를 유포한 템플릿입니다.', TRUE, '2024-07-17 16:20:55', 6),  #12
-    ('허위 정보를 유포한 템플릿입니다.', TRUE, '2024-07-19 08:10:35', 3),  #11
-    ('허위 정보를 유포한 템플릿입니다.', TRUE, '2024-07-20 22:40:50', 3),  #10
-    ('비방적인 언어를 사용한 댓글입니다', TRUE, '2024-07-21 13:25:15', 3),  #9
-    ('비방적인 언어를 사용한 댓글입니다', TRUE, '2024-07-22 15:50:05', 2),  #8
-    ('비방적인 언어를 사용한 댓글입니다', TRUE, '2024-07-23 17:35:40', 2),  #7
-    ('허위 정보를 유포한 게시글입니다.', TRUE, '2024-07-24 11:10:25', 3),  #6
-    ('허위 정보를 유포한 게시글입니다.', TRUE, '2024-07-25 20:55:30', 10), #5
-    ('허위 정보를 유포한 게시글입니다.', TRUE, '2024-07-26 07:05:55', 2),  #4
-    ('허위 정보를 유포한 게시글입니다.', TRUE, '2024-07-27 18:30:20', 6),  #3
-    ('허위 정보를 유포한 게시글입니다.', TRUE, '2024-07-28 14:15:45', 4),  #2
-    ('허위 정보를 유포한 게시글입니다.', TRUE, '2024-07-28 21:40:10', 3);  #1
 
 
 # 공지사항
@@ -437,27 +414,7 @@ VALUES
 ('유튜브 시작하기', '# 🎬 유튜브 채널 운영 가이드\n\n- **콘텐츠 기획법**', 'private', '2024-04-25 21:05:40', NULL, 7, 'N', 9),
 ('여행 경비 절약 팁', '# 🌍 저렴하게 여행하는 법\n\n- **LCC 항공권 활용하기**', 'subonly', '2024-04-28 22:55:50', NULL, 4, 'N', 10);
 
-# 신고별 구분
-INSERT
-INTO report_type
-(report_id, comment_id, post_id, template_id)
-VALUES
-    (1, NULL, 1, NULL),
-    (2, NULL, 2, NULL),
-    (3, NULL, 2, NULL),
-    (4, NULL, 3, NULL),
-    (5, NULL, 4, NULL),
-    (6, NULL, 6, NULL),
-    (7, 3, NULL, NULL),
-    (8, 4, NULL, NULL),
-    (9, 5, NULL, NULL),
-    (10, NULL, NULL, 5),
-    (11, NULL, NULL, 6),
-    (12, NULL, NULL, 2),
-    (13, NULL, NULL, 3),
-    (14, NULL, NULL, 1),
-    (15, NULL, NULL, 10),
-    (16, NULL, NULL, 9);
+
 
 # 회원별 프로필 사진
 INSERT
@@ -540,3 +497,45 @@ VALUES
 
     (10, 10), -- 등산 초보자 추천 -> 스포츠
     (10, 4);  -- 일상
+
+
+
+
+# 신고
+INSERT
+INTO report
+(content, status, date, type, member_id, comment_id, post_id ,template_id)
+VALUES
+    ('허위 정보를 유포한 템플릿입니다.', FALSE , '2024-07-11 10:15:30', 'template', 4
+    ,NULL,NULL,4),  #16
+    ('허위 정보를 유포한 템플릿입니다.', FALSE, '2024-07-12 12:30:45', 'template', 3
+    ,NULL,NULL,3),  #15
+    ('허위 정보를 유포한 템플릿입니다.', FALSE, '2024-07-13 14:05:20', 'template', 2
+    ,NULL,NULL,2),  #14
+    ('허위 정보를 유포한 템플릿입니다.', FALSE, '2024-07-14 09:45:10', 'template', 5
+    ,NULL,NULL,1),  #13
+    ('허위 정보를 유포한 템플릿입니다.', FALSE, '2024-07-17 16:20:55', 'template', 6
+    ,NULL,NULL,5),  #12
+    ('허위 정보를 유포한 템플릿입니다.', FALSE, '2024-07-19 08:10:35', 'template', 3
+    ,NULL,NULL,11),  #11F
+    ('허위 정보를 유포한 템플릿입니다.', FALSE, '2024-07-20 22:40:50', 'template', 3
+    ,NULL,NULL,8),  #10
+    ('비방적인 언어를 사용한 댓글입니다', FALSE, '2024-07-21 13:25:15', 'comment', 3
+    ,4,NULL,NULL),  #9
+    ('비방적인 언어를 사용한 댓글입니다', FALSE, '2024-07-22 15:50:05', 'comment', 2
+    ,5,NULL,NULL),  #8
+    ('비방적인 언어를 사용한 댓글입니다', FALSE, '2024-07-23 17:35:40', 'comment', 2
+    ,6,NULL,NULL),  #7
+    ('허위 정보를 유포한 게시글입니다.', FALSE, '2024-07-24 11:10:25', 'post', 3
+    ,NULL,1,NULL),  #6
+    ('허위 정보를 유포한 게시글입니다.', FALSE, '2024-07-25 20:55:30', 'post', 10
+    ,NULL,2,NULL), #5
+    ('허위 정보를 유포한 게시글입니다.', FALSE, '2024-07-26 07:05:55', 'post', 2
+    ,NULL,4,NULL),  #4
+    ('허위 정보를 유포한 게시글입니다.', FALSE, '2024-07-27 18:30:20', 'post', 6
+    ,NULL,3,NULL),  #3
+    ('허위 정보를 유포한 게시글입니다.', FALSE, '2024-07-28 14:15:45', 'post', 4
+    ,NULL,5,NULL),  #2
+    ('허위 정보를 유포한 게시글입니다.', FALSE, '2024-07-28 21:40:10', 'post', 3
+    ,NULL,8,NULL);  #1
+
