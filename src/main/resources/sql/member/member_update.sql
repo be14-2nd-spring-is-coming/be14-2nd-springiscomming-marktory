@@ -1,4 +1,4 @@
-# 닉네임 변경
+git # 닉네임 변경
 UPDATE member
     SET nickname = ?
   WHERE id = ?;
