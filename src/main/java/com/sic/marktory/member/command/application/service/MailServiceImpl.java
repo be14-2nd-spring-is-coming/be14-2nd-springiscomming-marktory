@@ -2,8 +2,7 @@ package com.sic.marktory.member.command.application.service;
 
 import com.sic.marktory.member.command.application.dto.EmailTokenDTO;
 import com.sic.marktory.member.command.application.dto.EmailTokenVerifyDTO;
-import com.sic.marktory.member.command.domain.aggregate.entity.EmailToken;
-import com.sic.marktory.member.command.domain.aggregate.vo.ResponseVerifyTokenVO;
+import com.sic.marktory.member.command.domain.aggregate.entity.EmailTokenEntity;
 import com.sic.marktory.member.command.domain.repository.EmailRepository;
 import com.sic.marktory.member.common.MailTemplate;
 import com.sic.marktory.member.common.exception.TokenAlreadyVerifiedException;
@@ -18,7 +17,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
@@ -81,8 +79,8 @@ public class MailServiceImpl implements MailService {
     @Override
     @Transactional
     public void registMailInfo(EmailTokenDTO emailTokenDTO) {
-        EmailToken emailToken = modelMapper.map(emailTokenDTO, EmailToken.class);
-        emailRepository.save(emailToken);
+        EmailTokenEntity emailTokenEntity = modelMapper.map(emailTokenDTO, EmailTokenEntity.class);
+        emailRepository.save(emailTokenEntity);
     }
 
     /* 설명. 이메일 토큰 인증 후, 상태 값 변동을 해주는 메소드
@@ -92,24 +90,24 @@ public class MailServiceImpl implements MailService {
     @Transactional
     public void verifyToken(EmailTokenVerifyDTO emailTokenVerifyDTO) throws TokenNotFoundException,
             TokenExpiredException, TokenAlreadyVerifiedException {
-        EmailToken foundEmailToken = emailRepository.findByToken(emailTokenVerifyDTO.getToken());
+        EmailTokenEntity foundEmailTokenEntity = emailRepository.findByToken(emailTokenVerifyDTO.getToken());
 
-        if (foundEmailToken == null) {
+        if (foundEmailTokenEntity == null) {
             throw new TokenNotFoundException("토큰이 일치하지 않습니다.");
         }
 
-        if (foundEmailToken.getExpirationTime().isBefore(LocalDateTime.now())) {
+        if (foundEmailTokenEntity.getExpirationTime().isBefore(LocalDateTime.now())) {
             throw new TokenExpiredException("토큰 시간이 만료되었습니다. 다시 요청을 보내주세요.");
         }
 
-        if (foundEmailToken.isVerified()) {
+        if (foundEmailTokenEntity.isVerified()) {
             throw new TokenAlreadyVerifiedException("이미 가입되어 있는 계정입니다.");
         }
-        foundEmailToken.setVerified(true);
+        foundEmailTokenEntity.setVerified(true);
         emailTokenVerifyDTO.setVerified(true);
         emailTokenVerifyDTO.setVerifyMessage("이메일 인증에 성공하였습니다.");
 
-        emailRepository.save(foundEmailToken);
+        emailRepository.save(foundEmailTokenEntity);
     }
 
 }

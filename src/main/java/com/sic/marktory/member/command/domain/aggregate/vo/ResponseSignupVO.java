@@ -4,9 +4,12 @@ import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter @Setter
+@Getter
 @ToString
+@EqualsAndHashCode
 public class ResponseSignupVO {
     private String nickname;
     private String message;
+
+
 }

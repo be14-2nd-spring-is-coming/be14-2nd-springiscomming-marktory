@@ -4,8 +4,9 @@ import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter @Setter
+@Getter
 @ToString
+@EqualsAndHashCode
 public class RequestEmailVO {
     private String email;
 }

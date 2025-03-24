@@ -539,9 +539,6 @@ VALUES
     ('허위 정보를 유포한 게시글입니다.', FALSE, '2024-07-28 21:40:10', 'post', 3
     ,NULL,8,NULL);  #1
 
-
-
-
 # 신고
 INSERT
 INTO report
@@ -579,3 +576,4 @@ VALUES
     ,NULL,5,NULL),  #2
     ('허위 정보를 유포한 게시글입니다.', FALSE, '2024-07-28 21:40:10', 'post', 3
     ,NULL,8,NULL);  #1g
+
