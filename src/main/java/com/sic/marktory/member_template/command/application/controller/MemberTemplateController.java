@@ -1,13 +1,11 @@
 package com.sic.marktory.member_template.command.application.controller;
 
 import com.sic.marktory.member_template.command.application.dto.MemberTemplateCreateRequest;
+import com.sic.marktory.member_template.command.application.dto.MemberTemplateUpdateRequest;
 import com.sic.marktory.member_template.command.application.service.MemberTemplateServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController("MemberTemplateCommandController")
 @RequestMapping("/member-template")
@@ -24,5 +22,10 @@ public class MemberTemplateController {
         return ResponseEntity.ok(id);
     }
 
+    @PostMapping("/{id}")
+    public ResponseEntity<Long> putUpdateMemberTemplate(@PathVariable Long id, @RequestBody MemberTemplateUpdateRequest request) {
+        memberTemplateService.updateMemberTemplate(id, request);
+        return ResponseEntity.ok().build();
+    }
 
 }

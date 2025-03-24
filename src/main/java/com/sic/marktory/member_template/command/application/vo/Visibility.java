@@ -1,5 +1,6 @@
 package com.sic.marktory.member_template.command.application.vo;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
 import lombok.EqualsAndHashCode;
@@ -13,7 +14,8 @@ import java.util.Objects;
 @EqualsAndHashCode
 @ToString
 public class Visibility {
-    private String visibility;
+
+    private String value;
 
     protected Visibility() {}
 
@@ -21,7 +23,7 @@ public class Visibility {
         if (!value.equals("public") && !value.equals("private") && !value.equals("subonly")) {
             throw new IllegalArgumentException("Invalid visibility type: " + value);
         }
-        this.visibility = value;
+        this.value = value;
     }
 }
 

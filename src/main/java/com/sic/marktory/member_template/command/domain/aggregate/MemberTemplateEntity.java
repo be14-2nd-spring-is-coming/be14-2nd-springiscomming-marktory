@@ -10,6 +10,7 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
+@ToString
 @Table(name = "member_template")
 public class MemberTemplateEntity {
     @Id
@@ -32,8 +33,7 @@ public class MemberTemplateEntity {
     @Column(name = "usage_count" , nullable = false)
     private Integer usageCount;
 
-    @Embedded
-    @Column(name = "visibility", nullable = false)
+    @AttributeOverride(name = "value", column = @Column(name = "visibility", nullable = false))
     private Visibility visibility;
 
     @Column(name = "is_copy" , nullable = false)
@@ -41,4 +41,12 @@ public class MemberTemplateEntity {
 
     @Column(name = "repository_id")
     private Long repositoryId;
+
+    public void update(String title, String content, Visibility visibility, String writtenDate) {
+        this.title = title;
+        this.content = content;
+        this.visibility = visibility;
+        this.writtenDate = writtenDate;
+    }
+
 }

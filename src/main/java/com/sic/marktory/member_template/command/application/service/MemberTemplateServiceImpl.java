@@ -2,19 +2,23 @@ package com.sic.marktory.member_template.command.application.service;
 
 import com.sic.marktory.common.DateTimeUtil;
 import com.sic.marktory.member_template.command.application.dto.MemberTemplateCreateRequest;
+import com.sic.marktory.member_template.command.application.dto.MemberTemplateUpdateRequest;
 import com.sic.marktory.member_template.command.domain.aggregate.MemberTemplateEntity;
 import com.sic.marktory.member_template.command.application.vo.Visibility;
 import com.sic.marktory.member_template.command.domain.repository.MemberTemplateRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("MemberTemplateCommandServiceImpl")
 @RequiredArgsConstructor
+@Slf4j
 public class MemberTemplateServiceImpl implements MemberTemplateService {
 
     private final MemberTemplateRepository memberTemplateRepository;
 
+    // 회원이 템플릿을 작성
     @Override
     @Transactional
     public Long createMemberTemplate(MemberTemplateCreateRequest request) {
@@ -22,7 +26,7 @@ public class MemberTemplateServiceImpl implements MemberTemplateService {
                 .title(request.getTitle())
                 .content(request.getContent())
                 .writtenDate(DateTimeUtil.nowFormatted())
-                .visibility(new Visibility(request.getVisibility()))
+//                .visibility(new Visibility(request.getVisibility()))
                 .usageCount(0)
                 .isCopy('N')
                 // TODO : 회원의 id를 받아서 생성해야 함. 현재는 command 구조 테스트를 위한 코드임.
@@ -30,5 +34,24 @@ public class MemberTemplateServiceImpl implements MemberTemplateService {
                 .build();
 
         return memberTemplateRepository.save(template).getId();
+    }
+
+    // 회원이 특정 템플릿을 수정
+    @Override
+    @Transactional
+    public void updateMemberTemplate(Long id, MemberTemplateUpdateRequest request) {
+        MemberTemplateEntity template = memberTemplateRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Template not found with id: " + id));
+
+        log.info("Updating member template with id : " + template + ", id : "+ id);
+
+        template.update(
+                request.getTitle(),
+                request.getContent(),
+                new Visibility(request.getVisibility()),
+                DateTimeUtil.nowFormatted()
+        );
+
+        log.info("Updating member template with id : " + template + ", id : "+ id);
     }
 }

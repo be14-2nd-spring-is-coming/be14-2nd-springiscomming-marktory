@@ -1,6 +1,7 @@
 package com.sic.marktory.member_template.command.application.service;
 
 import com.sic.marktory.member_template.command.application.dto.MemberTemplateCreateRequest;
+import com.sic.marktory.member_template.command.application.dto.MemberTemplateUpdateRequest;
 
 public interface MemberTemplateService {
 
@@ -8,4 +9,5 @@ public interface MemberTemplateService {
     Long createMemberTemplate(MemberTemplateCreateRequest request);
 
     // 사용자 템플릿 수정
+    void updateMemberTemplate(Long id, MemberTemplateUpdateRequest request);
 }
