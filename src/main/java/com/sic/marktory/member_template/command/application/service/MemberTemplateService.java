@@ -6,4 +6,6 @@ public interface MemberTemplateService {
 
     // 사용자가 템플릿을 작성
     Long createMemberTemplate(MemberTemplateCreateRequest request);
+
+    // 사용자 템플릿 수정
 }

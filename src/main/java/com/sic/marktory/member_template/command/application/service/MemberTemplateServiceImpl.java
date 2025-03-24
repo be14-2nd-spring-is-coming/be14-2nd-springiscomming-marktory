@@ -1,15 +1,13 @@
 package com.sic.marktory.member_template.command.application.service;
 
+import com.sic.marktory.common.DateTimeUtil;
 import com.sic.marktory.member_template.command.application.dto.MemberTemplateCreateRequest;
-import com.sic.marktory.member_template.command.application.entity.MemberTemplateEntity;
+import com.sic.marktory.member_template.command.domain.aggregate.MemberTemplateEntity;
 import com.sic.marktory.member_template.command.application.vo.Visibility;
 import com.sic.marktory.member_template.command.domain.repository.MemberTemplateRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.Instant;
-import java.util.Date;
 
 @Service("MemberTemplateCommandServiceImpl")
 @RequiredArgsConstructor
@@ -23,7 +21,7 @@ public class MemberTemplateServiceImpl implements MemberTemplateService {
         MemberTemplateEntity template = MemberTemplateEntity.builder()
                 .title(request.getTitle())
                 .content(request.getContent())
-                .writtenDate(Date.from(Instant.now()).toString())
+                .writtenDate(DateTimeUtil.nowFormatted())
                 .visibility(new Visibility(request.getVisibility()))
                 .usageCount(0)
                 .isCopy('N')

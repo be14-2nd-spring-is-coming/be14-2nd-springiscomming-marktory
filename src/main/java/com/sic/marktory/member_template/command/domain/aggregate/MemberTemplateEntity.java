@@ -1,9 +1,10 @@
-package com.sic.marktory.member_template.command.application.entity;
+package com.sic.marktory.member_template.command.domain.aggregate;
 
 import com.sic.marktory.member_template.command.application.vo.Visibility;
 import jakarta.persistence.*;
 import lombok.*;
 
+// TODO: report_type command도 만들어야 hibernate가 정상적으로 해당 테이블을 Drop
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
