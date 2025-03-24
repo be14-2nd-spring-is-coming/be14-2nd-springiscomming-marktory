@@ -1,13 +1,12 @@
 package com.sic.marktory.member.command.domain.repository;
 
-import com.sic.marktory.member.command.domain.aggregate.entity.EmailToken;
-import com.sic.marktory.member.command.domain.aggregate.entity.Member;
+import com.sic.marktory.member.command.domain.aggregate.entity.EmailTokenEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /* 설명. 추후에, Redis로 리팩토링 할 레포지토리 클래스 */
-public interface EmailRepository extends JpaRepository<EmailToken, Long> {
+public interface EmailRepository extends JpaRepository<EmailTokenEntity, Long> {
 
-    EmailToken findByToken(String token);
+    EmailTokenEntity findByToken(String token);
 
-    EmailToken findByEmail(String email);
+    EmailTokenEntity findByEmail(String email);
 }

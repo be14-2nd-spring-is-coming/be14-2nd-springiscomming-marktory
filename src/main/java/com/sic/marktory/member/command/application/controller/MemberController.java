@@ -44,11 +44,11 @@ public class MemberController {
 
         EmailTokenDTO emailTokenDTO = modelMapper.map(email, EmailTokenDTO.class);
         mailService.sendVerificationEmail(emailTokenDTO);
-        ResponseEmailVO responseEmailVO = modelMapper.map(emailTokenDTO, ResponseEmailVO.class);
-        responseEmailVO.setMessage("회원가입 이메일이 전송되었습니다.");
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(responseEmailVO);
+                .body(new ResponseEmailVO(emailTokenDTO.getEmail(),
+                        emailTokenDTO.getToken(),
+                        "이메일이 전송되었습니다."));
     }
 
     /* 설명. 이메일 토큰 확인
@@ -86,11 +86,10 @@ public class MemberController {
         MemberDTO memberDTO = mapper.map(signupVO, MemberDTO.class);
         try {
             memberService.registMember(memberDTO);
-            ResponseSignupVO responseSignupVO = mapper.map(memberDTO, ResponseSignupVO.class);
-            responseSignupVO.setMessage("회원가입이 완료되었습니다. 환영합니다!");
             return ResponseEntity
                     .status(HttpStatus.CREATED)
-                    .body(responseSignupVO);
+                    .body(new ResponseSignupVO(memberDTO.getNickname(),
+                            "회원가입이 완료되었습니다! 환영합니다!"));
         } catch (NickNameException e) {
             return ResponseEntity
                     .status(HttpStatus.CONFLICT)

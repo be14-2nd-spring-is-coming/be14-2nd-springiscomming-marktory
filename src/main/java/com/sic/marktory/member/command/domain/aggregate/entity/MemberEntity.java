@@ -3,9 +3,6 @@ package com.sic.marktory.member.command.domain.aggregate.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 
 // 멤버 엔티티 생성
 @Entity
@@ -14,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Member {
+public class MemberEntity {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
