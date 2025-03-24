@@ -1,20 +1,17 @@
 package com.sic.marktory.comment.command.application.service;
 
-import com.sic.marktory.comment.command.application.dto.CommentRequestDTO;
-import com.sic.marktory.comment.command.application.dto.CommentResponseDTO;
+import com.sic.marktory.comment.command.application.dto.CommentCreateRequest;
+import com.sic.marktory.comment.command.application.dto.CommentUpdateRequest;
 import com.sic.marktory.comment.command.domain.aggregate.CommentEntity;
 import com.sic.marktory.comment.command.domain.repository.CommentRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Date;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 @Service("commandCommentServiceImpl")
 @RequiredArgsConstructor
@@ -25,7 +22,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional
-    public Long createComment(Long postId, CommentRequestDTO request) {
+    public Long createComment(Long postId, CommentCreateRequest request) {
         CommentEntity comment = CommentEntity.builder()
                 .content(request.getContent())
                 .writtenDate(LocalDateTime.now().withNano(0))
@@ -37,4 +34,26 @@ public class CommentServiceImpl implements CommentService {
                 .build();
         return commentRepository.save(comment).getId();
     }
+
+    @Override
+    @Transactional
+    public Long updateComment(Long commentId, CommentUpdateRequest request) {
+        CommentEntity comment = commentRepository.findById(commentId).orElseThrow(EntityNotFoundException::new);
+
+        comment.updateContent(request.getContent());
+
+        return comment.getId();
+    }
+
+    @Override
+    @Transactional
+    public Long deleteComment(Long commentId) {
+        CommentEntity comment = commentRepository.findById(commentId).orElseThrow(EntityNotFoundException::new);
+
+        comment.softDelete();
+
+        return comment.getId();
+    }
+
+
 }
