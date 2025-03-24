@@ -63,11 +63,28 @@ public class SubscribeController {
 
 
     // 내가 구독한 사람
-    //@GetMapping("/my-subscriptions/{subscriberId}")
+    @GetMapping("/my-subscriptions/{subscriberId}")
+    public ResponseEntity<?> getMySubscriptions(@PathVariable Long subscriberId){
+        try {
+            List<SubscribeResponseVO> subscriptions = subscribeService.getMySubscriptions(subscriberId);
+            return ResponseEntity.ok(subscriptions);
+        } catch (SubscribeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
 
 
     // 나를 구독한 사람
-    //@GetMapping("/my-subscribers/{subscribedId}")
+    @GetMapping("/my-subscribers/{subscribedId}")
+    public ResponseEntity<?> getMySubscribers(@PathVariable Long subscribedId) {
+        try {
+            List<SubscribeResponseVO> subscribers  = subscribeService.getMySubscribers(subscribedId);
+            return ResponseEntity.ok(subscribers);
+        } catch (SubscribeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
 
 
     // 구독 알림 전체 변경 (구독한 모든 대상의 알림을 'N'으로 설정)
