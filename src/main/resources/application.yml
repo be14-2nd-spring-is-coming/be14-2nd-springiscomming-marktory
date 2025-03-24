@@ -15,7 +15,7 @@ spring:
   ## jpa config
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none # DB 짜여진 구조를 지키기 위해 변경
     show-sql: true
     database: mysql
     properties:
