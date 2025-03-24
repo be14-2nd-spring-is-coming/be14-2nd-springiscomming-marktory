@@ -18,5 +18,7 @@ public interface SubscribeRepository extends JpaRepository<SubscribeEntity, Long
     List<SubscribeEntity> findAllBySubscriberId(Long subscriberId);
 
     // 나를 구독한 사람들 목록 조회
+    List<SubscribeEntity> findAllBySubscribedId(Long subscribedId);
+
 
 }

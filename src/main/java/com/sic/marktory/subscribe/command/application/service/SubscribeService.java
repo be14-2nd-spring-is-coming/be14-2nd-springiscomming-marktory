@@ -15,4 +15,7 @@ public interface SubscribeService {
 
     // 내가 구독한 사람 목록 조회
     List<SubscribeResponseVO> getMySubscriptions(Long subscriberId);
+
+    // 나를 구독한 사람 목록 조회
+    List<SubscribeResponseVO> getMySubscribers(Long subscribedId);
 }

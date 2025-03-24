@@ -93,5 +93,19 @@ public class SubscribeServiceImpl implements SubscribeService{
         return subscriptions;
     }
 
+    // 나를 구독한 사람 목록 조회
+    @Override
+    public List<SubscribeResponseVO> getMySubscribers(Long subscribedId) {
+        List<SubscribeResponseVO> subscribers = subscribeRepository.findAllBySubscribedId(subscribedId)
+                .stream()
+                .map(SubscribeResponseVO::new)
+                .collect(Collectors.toList());
 
+        // 3️나를 구독한 사람이 없을 경우 예외 처리
+        if (subscribers.isEmpty()) {
+            throw new SubscribeException("나를 구독한 사람이 없습니다.");
+        }
+
+        return subscribers;
+    }
 }
