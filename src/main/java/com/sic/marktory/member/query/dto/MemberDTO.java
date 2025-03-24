@@ -1,15 +1,12 @@
 package com.sic.marktory.member.query.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
+@Getter @Setter
 @ToString
-public class MembetDTO {
+public class MemberDTO {
     private int id;
     private String email;
     private String password;

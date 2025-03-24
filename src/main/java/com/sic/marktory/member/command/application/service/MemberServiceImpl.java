@@ -3,8 +3,10 @@ package com.sic.marktory.member.command.application.service;
 import com.sic.marktory.member.command.application.dto.MemberDTO;
 import com.sic.marktory.member.command.domain.aggregate.entity.EmailTokenEntity;
 import com.sic.marktory.member.command.domain.aggregate.entity.MemberEntity;
+import com.sic.marktory.member.command.domain.aggregate.entity.MemberRolesEntity;
 import com.sic.marktory.member.command.domain.repository.EmailRepository;
 import com.sic.marktory.member.command.domain.repository.MemberRepository;
+import com.sic.marktory.member.command.domain.repository.MemberRolesRepository;
 import com.sic.marktory.member.common.exception.NickNameException;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -22,21 +24,25 @@ public class MemberServiceImpl implements MemberService {
 
     private MemberRepository memberRepository;
     private EmailRepository emailRepository;
+    private MemberRolesRepository memberRolesRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private ModelMapper modelMapper;
 
 
+    @Autowired
     public MemberServiceImpl(MemberRepository memberRepository,
                              EmailRepository emailRepository,
+                             MemberRolesRepository memberRolesRepository,
                              BCryptPasswordEncoder bCryptPasswordEncoder,
                              ModelMapper modelMapper) {
         this.memberRepository = memberRepository;
         this.emailRepository = emailRepository;
+        this.memberRolesRepository = memberRolesRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.modelMapper = modelMapper;
     }
 
-    /* 설명. 회원가입 실행 */
+    /* 설명. 일반 회원 회원가입 실행 */
     @Override
     @Transactional
     public void registMember(MemberDTO memberDTO) throws NickNameException {
@@ -63,5 +69,9 @@ public class MemberServiceImpl implements MemberService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         newMemberEntity.setAssignedDate(LocalDateTime.now().format(formatter));
         memberRepository.save(newMemberEntity);
+
+        /* 설명. memberRepository가 저장되면 멤버별 권한도 자동으로 save */
+        MemberRolesEntity memberRolesEntity = new MemberRolesEntity(newMemberEntity.getId(), 2);
+        memberRolesRepository.save(memberRolesEntity);
     }
 }

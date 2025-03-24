@@ -1,4 +1,10 @@
 package com.sic.marktory.member.query.mapper;
 
-public class AuthorityMapper {
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
+
+@Mapper
+public interface AuthorityMapper {
+    List<String> selectAllRoles();
 }

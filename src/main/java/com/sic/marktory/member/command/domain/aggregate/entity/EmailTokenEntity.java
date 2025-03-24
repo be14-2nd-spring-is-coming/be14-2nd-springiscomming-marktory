@@ -23,7 +23,9 @@ public class EmailTokenEntity {
     @Column(unique = true)
     private String token;
 
+    @Column(name = "expiration_time")
     private LocalDateTime expirationTime;
 
+    @Column(name = "is_verified")
     private boolean isVerified = false;
 }

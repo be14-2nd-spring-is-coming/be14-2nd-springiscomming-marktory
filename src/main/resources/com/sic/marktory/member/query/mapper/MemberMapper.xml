@@ -3,18 +3,40 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sic.marktory.member.query.mapper.MemberMapper">
-<resultMap id="memberMap" type="com.sic.marktory.member.query.dto.MemberDTO">
-    <id property="id" column="id"/>
-    <result property="email" column="email"/>
-    <result property="password" column="password"/>
-    <result property="name" column="name"/>
-    <result property="nickname" column="nickname"/>
-    <result property="birthday" column="birthday"/>
-    <result property="image" column="image"/>
-    <result property="status" column="status"/>
-    <result property="blackDate" column="black_date"/>
-    <result property="assignedDate" column="assigned_date"/>
-    <result property="reportCount" column="report_count"/>
-    <result property="isTerms" column="is_terms"/>
-</resultMap>
+    <resultMap id="memberMap" type="com.sic.marktory.member.query.dto.MemberDTO">
+        <id property="id" column="id"/>
+        <result property="email" column="email"/>
+        <result property="password" column="password"/>
+        <result property="name" column="name"/>
+        <result property="nickname" column="nickname"/>
+        <result property="birthday" column="birthday"/>
+        <result property="image" column="image"/>
+        <result property="status" column="status"/>
+        <result property="blackDate" column="black_date"/>
+        <result property="assignedDate" column="assigned_date"/>
+        <result property="reportCount" column="report_count"/>
+        <result property="isTerms" column="is_terms"/>
+    </resultMap>
+
+    <!-- 1. 권한 별 인증을 위한 resultMap -->
+    <resultMap id="memberWithRoleMap" type="com.sic.marktory.member.query.dto.MemberWithRoleDTO">
+        <id property="id" column="id"/>
+        <result property="email" column="email"/>
+        <result property="password" column="password"/>
+        <result property="role" column="authority"/> <!-- 권한 조인 결과 -->
+    </resultMap>
+
+    <!-- 2. 3중 조인 문 -->
+    <select id="selectMemberWithRoleByEmail" parameterType="string" resultMap="memberWithRoleMap">
+        SELECT
+               A.id
+             , A.email
+             , A.password
+             , C.name
+          FROM member A
+          JOIN member_roles B ON A.id = B.member_id
+          JOIN authority C ON B.authority_id = C.id
+         WHERE A.email = #{email}
+    </select>
+
 </mapper>

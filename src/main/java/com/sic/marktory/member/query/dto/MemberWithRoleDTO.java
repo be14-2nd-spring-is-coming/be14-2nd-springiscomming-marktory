@@ -7,7 +7,9 @@ import lombok.*;
 @AllArgsConstructor
 @Getter @Setter
 @ToString
-public class MemberRoleDTO {
+public class MemberWithRoleDTO {
+    private int id;
     private String email;
-    private String role;
+    private String password;
+    private String role; // 조인된 권한 (ex. ROLE_ADMIN)
 }

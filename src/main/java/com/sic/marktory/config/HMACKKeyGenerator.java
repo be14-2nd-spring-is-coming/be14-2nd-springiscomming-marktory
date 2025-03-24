@@ -1,4 +1,4 @@
-package com.sic.marktory.member.config;
+package com.sic.marktory.config;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;

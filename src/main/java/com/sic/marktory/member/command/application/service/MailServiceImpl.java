@@ -44,6 +44,7 @@ public class MailServiceImpl implements MailService {
 
     /* 설명. 이메일 전송을 위한 코드 */
     @Override
+    @Transactional
     public void sendVerificationEmail(EmailTokenDTO emailTokenDTO){
         /* 설명. 토큰 생성 + 이메일 전송 */
         String verificationTokenCode = UUID.randomUUID().toString();
