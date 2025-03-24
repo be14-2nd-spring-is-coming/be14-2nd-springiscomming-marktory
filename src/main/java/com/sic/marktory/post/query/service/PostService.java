@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PostService {
 
-    // 회원 공개 전체 게시글 조회
+    // 회원 공개 전체 게시글 조회 (public)
     List<PostDTO> findPublicPosts();
 
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-// HTTP요청을 받아 서비스 호출하고 결과를 반환
+
 @RestController
 @RequestMapping("/post")
 public class PostController {
