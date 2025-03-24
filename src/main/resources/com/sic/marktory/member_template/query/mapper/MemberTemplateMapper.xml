@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sic.marktory.member_template.query.mapper.MemberTemplateMapper">
     <resultMap type="com.sic.marktory.member_template.query.dto.MemberTemplateDTO" id="memberTemplateResultMap">
-        <id property="id" column="id" />
+        <id property="id" column="id"/>
         <result property="title" column="TITLE"/>
         <result property="content" column="CONTENT"/>
         <result property="visibility" column="VISIBILITY"/>
@@ -15,7 +15,26 @@
         <result property="repositoryId" column="REPOSITORY_ID"/>
     </resultMap>
 
-    <select id="selectMemberTemplatePublicAll" resultMap="memberTemplateResultMap">
+    <!-- 특정 회원의 공개된 템플릿만 조회   -->
+    <!-- TODO: 동적 쿼리 적용해보기   -->
+    <select id="selectMemberTemplatePublicAll" resultMap="memberTemplateResultMap" parameterType="_long">
+        SELECT id
+             , title
+             , content
+             , visibility
+             , written_date
+             , delete_date
+             , usage_count
+             , is_copy
+             , repository_id
+        FROM member_template
+        WHERE visibility = 'public' AND repository_id = #{memberId};
+    </select>
+
+    <!-- TODO: 본인이 구독중인 회원의 템플릿 조회   -->
+
+    <!-- 특정 회원의 모든 템플릿 조회 : 백엔드 코드에서 보안처리(인증) 필요  -->
+    <select id="selectMemberTemplates" resultMap="memberTemplateResultMap" parameterType="_long">
         SELECT
                id
              , title
@@ -27,7 +46,9 @@
              , is_copy
              , repository_id
         FROM member_template
-        WHERE visibility = 'public';
+        WHERE repository_id IN (SELECT id
+                                FROM template_space
+                                WHERE member_id = #{memberId});
     </select>
 
 </mapper>

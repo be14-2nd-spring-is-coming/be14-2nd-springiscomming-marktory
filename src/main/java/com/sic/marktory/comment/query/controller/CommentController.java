@@ -2,6 +2,7 @@ package com.sic.marktory.comment.query.controller;
 
 import com.sic.marktory.comment.query.dto.CommentDTO;
 import com.sic.marktory.comment.query.service.CommentService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,8 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@RestController("queryCommentController")
 @RequestMapping("api/comment")
+@Slf4j
 public class CommentController {
 
     private final CommentService commentService;

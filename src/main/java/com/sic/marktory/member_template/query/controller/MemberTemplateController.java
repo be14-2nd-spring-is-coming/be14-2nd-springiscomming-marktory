@@ -3,10 +3,7 @@ package com.sic.marktory.member_template.query.controller;
 import com.sic.marktory.member_template.query.dto.MemberTemplateDTO;
 import com.sic.marktory.member_template.query.service.MemberTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,9 +18,17 @@ public class MemberTemplateController {
         this.memberTemplateService = memberTemplateService;
     }
 
-    @GetMapping("/public/templates")
+    // 특정 회원의 모든 템플릿 조회 (회원 본인)
+    @PostMapping("/templates/{memberId}")
     @ResponseBody
-    public List<MemberTemplateDTO> getMemberTemplates() {
-        return memberTemplateService.findMemberTemplatePublicAll();
+    public List<MemberTemplateDTO> PostMemberTemplates(@PathVariable Long memberId) {
+        return memberTemplateService.findMemberTemplates(memberId);
+    }
+
+    // 특정 회원의 공개된 템플릿 조회
+    @GetMapping("/public/templates/{memberId}")
+    @ResponseBody
+    public List<MemberTemplateDTO> getMemberTemplatePublicAll(@PathVariable Long memberId) {
+        return memberTemplateService.findMemberTemplatePublicAll(memberId);
     }
 }
