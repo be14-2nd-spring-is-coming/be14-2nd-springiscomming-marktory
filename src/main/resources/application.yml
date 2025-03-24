@@ -34,3 +34,8 @@ spring:
           auth: true
           starttls:
             enable: true
+
+## HMA KEY 토큰 설정
+token:
+  expiration_time: 43200000
+  secret: vQTSZpM7hZLbxzh7kxA6FyiASbZ2brbgpQJI58YhEu6LbzlNvncsXKTQxpNWz8fYsBh3jzoDrJq9J+Wet7uJQQ==
