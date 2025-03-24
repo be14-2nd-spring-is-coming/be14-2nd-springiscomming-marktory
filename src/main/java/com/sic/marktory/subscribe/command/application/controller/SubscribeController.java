@@ -63,7 +63,16 @@ public class SubscribeController {
 
 
     // 내가 구독한 사람
-    //@GetMapping("/my-subscriptions/{subscriberId}")
+    @GetMapping("/my-subscriptions/{subscriberId}")
+    public ResponseEntity<?> getMySubscriptions(@PathVariable Long subscriberId){
+        try {
+            List<SubscribeResponseVO> subscriptions = subscribeService.getMySubscriptions(subscriberId);
+            return ResponseEntity.ok(subscriptions);
+        } catch (SubscribeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
 
 
     // 나를 구독한 사람

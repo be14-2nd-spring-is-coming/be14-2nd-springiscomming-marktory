@@ -12,6 +12,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service("subscribeCommandService")
 @RequiredArgsConstructor
 @Transactional
@@ -72,5 +75,23 @@ public class SubscribeServiceImpl implements SubscribeService{
         // 구독 데이터 삭제
         subscribeRepository.deleteBySubscriberIdAndSubscribedId(subscriberId, subscribedId);
     }
+
+    // 내가 구독한 사람 목록 조회
+    @Override
+    public List<SubscribeResponseVO> getMySubscriptions(Long subscriberId) {
+        List<SubscribeResponseVO> subscriptions = subscribeRepository.findAllBySubscriberId(subscriberId)
+                .stream()
+                .map(SubscribeResponseVO::new)
+                .collect(Collectors.toList());
+
+        // ! 요청한 id가 존재하지 않을 때 예외 처리도 진행? (요청 id는 로그인 시 넘어온다고 생각..)
+        // 구독한 사람이 없을 때 예외 처리
+        if (subscriptions.isEmpty()) {
+            throw new SubscribeException("구독한 사람이 없습니다.");
+        }
+
+        return subscriptions;
+    }
+
 
 }
