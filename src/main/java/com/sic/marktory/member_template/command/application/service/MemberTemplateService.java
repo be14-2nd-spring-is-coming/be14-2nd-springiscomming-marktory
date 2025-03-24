@@ -10,4 +10,7 @@ public interface MemberTemplateService {
 
     // 사용자 템플릿 수정
     void updateMemberTemplate(Long id, MemberTemplateUpdateRequest request);
+
+    // 사용자 템플릿 삭제
+    void deleteMemberTemplate(Long id);
 }

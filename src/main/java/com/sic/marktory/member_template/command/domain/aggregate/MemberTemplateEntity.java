@@ -1,8 +1,11 @@
 package com.sic.marktory.member_template.command.domain.aggregate;
 
+import com.sic.marktory.common.DateTimeUtil;
 import com.sic.marktory.member_template.command.application.vo.Visibility;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDate;
 
 // TODO: report_type command도 만들어야 hibernate가 정상적으로 해당 테이블을 Drop
 @Entity
@@ -47,6 +50,10 @@ public class MemberTemplateEntity {
         this.content = content;
         this.visibility = visibility;
         this.writtenDate = writtenDate;
+    }
+
+    public void delete() {
+        this.deleteDate = DateTimeUtil.nowFormatted();
     }
 
 }

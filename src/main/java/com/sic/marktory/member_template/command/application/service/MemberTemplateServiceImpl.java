@@ -54,4 +54,16 @@ public class MemberTemplateServiceImpl implements MemberTemplateService {
 
         log.info("Updating member template with id : " + template + ", id : "+ id);
     }
+
+    @Override
+    @Transactional
+    public void deleteMemberTemplate(Long id) {
+        MemberTemplateEntity template = memberTemplateRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Template not found with id: " + id));
+
+        template.delete();
+
+        log.info("Updating member template with id : " + template + ", id : "+ id);
+    }
+
 }

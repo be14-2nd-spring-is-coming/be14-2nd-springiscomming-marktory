@@ -22,9 +22,15 @@ public class MemberTemplateController {
         return ResponseEntity.ok(id);
     }
 
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Long> putUpdateMemberTemplate(@PathVariable Long id, @RequestBody MemberTemplateUpdateRequest request) {
         memberTemplateService.updateMemberTemplate(id, request);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Long> pubDeleteMemberTemplate(@PathVariable Long id) {
+        memberTemplateService.deleteMemberTemplate(id);
         return ResponseEntity.ok().build();
     }
 
