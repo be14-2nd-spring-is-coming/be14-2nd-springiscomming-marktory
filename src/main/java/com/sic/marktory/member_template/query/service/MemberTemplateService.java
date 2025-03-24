@@ -9,5 +9,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 public interface MemberTemplateService {
-    public List<MemberTemplateDTO> findMemberTemplatePublicAll();
+    // 특정 회원의 템플릿 조회 (본인)
+    public List<MemberTemplateDTO> findMemberTemplates(Long memberId);
+
+    // 특정 회원의 공개된 템플릿 조회
+    public List<MemberTemplateDTO> findMemberTemplatePublicAll(Long memberId);
+
+    // TODO: 구독중인 회원의 템플릿 조회
 }
