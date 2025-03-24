@@ -1,2 +1,36 @@
 server:
   port: 8080
+
+spring:
+  application:
+    name: sic-marktory
+
+  ## db config
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/teamdb
+    username: root
+    password: mariadb
+
+  ## jpa config
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    database: mysql
+    properties:
+      hibernate:
+        '[format_sql]': true
+
+  # 메일을 위한 smtp 설정
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ehdgks0309@gmail.com
+    password: rnkbjgrochzkcmwl
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
