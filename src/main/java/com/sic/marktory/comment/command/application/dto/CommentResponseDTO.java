@@ -33,6 +33,6 @@ public class CommentResponseDTO {
     @Builder.Default
     private Boolean isDeleted = false;
 
-    @NotNull(message="댓글 내용을 입력해 주세요.")
+    @NotNull
     private String content;
 }
