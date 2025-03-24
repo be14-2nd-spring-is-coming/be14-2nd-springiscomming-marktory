@@ -6,6 +6,7 @@ import com.sic.marktory.subscribe.command.domain.aggregate.entity.SubscribeEntit
 import com.sic.marktory.subscribe.command.domain.aggregate.vo.SubscribeRequestVO;
 import com.sic.marktory.subscribe.command.domain.aggregate.vo.SubscribeResponseVO;
 import com.sic.marktory.subscribe.command.domain.repository.SubscribeRepository;
+import com.sic.marktory.subscribe.common.exception.AlreadysubscribeException;
 import com.sic.marktory.subscribe.common.exception.SubscribeException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class SubscribeServiceImpl implements SubscribeService{
         // 구독 중복 예외 처리
         if (subscribeRepository.existsBySubscriberIdAndSubscribedId(
                 requestVO.getSubscriberId(), requestVO.getSubscribedId())) {
-            throw new SubscribeException("이미 구독한 회원입니다.");
+            throw new AlreadysubscribeException("이미 구독한 회원입니다.");
         }
 
         // 멤버 정보 가져오기

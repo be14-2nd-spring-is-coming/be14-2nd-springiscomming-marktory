@@ -3,6 +3,7 @@ package com.sic.marktory.subscribe.command.application.controller;
 import com.sic.marktory.subscribe.command.application.service.SubscribeService;
 import com.sic.marktory.subscribe.command.domain.aggregate.vo.SubscribeRequestVO;
 import com.sic.marktory.subscribe.command.domain.aggregate.vo.SubscribeResponseVO;
+import com.sic.marktory.subscribe.common.exception.AlreadysubscribeException;
 import com.sic.marktory.subscribe.common.exception.SubscribeException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -32,9 +33,17 @@ public class SubscribeController {
         try {
             SubscribeRequestVO requestVO = new SubscribeRequestVO(subscriberId, subscribedId, true);
             SubscribeResponseVO responseVO = subscribeService.subscribe(requestVO);
+
+            // 구독 성공
             return ResponseEntity.status(HttpStatus.CREATED).body(responseVO);
         } catch (SubscribeException e) {
+
+            // 구독 실패 (자기 자신, 존재하지 않는 회원 구독 시 등)
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (AlreadysubscribeException e) {
+            
+            // 구독 충돌 (중복 구독 시)
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
     }
     // 구독 취소
