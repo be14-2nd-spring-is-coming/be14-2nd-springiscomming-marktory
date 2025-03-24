@@ -7,4 +7,7 @@ import com.sic.marktory.subscribe.command.domain.aggregate.vo.SubscribeResponseV
 public interface SubscribeService {
     // 구독하기
     SubscribeResponseVO subscribe(SubscribeRequestVO requestVO);
+
+    // 구독 취소
+    void unsubscribe(Long subscriberId, Long subscribedId);
 }

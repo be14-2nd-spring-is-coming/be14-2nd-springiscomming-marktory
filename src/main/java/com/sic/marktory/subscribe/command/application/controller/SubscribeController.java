@@ -46,8 +46,20 @@ public class SubscribeController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
     }
+
     // 구독 취소
-    //@DeleteMapping("/{subscriberId}/{subscribedId}")
+    @DeleteMapping("/{subscriberId}/{subscribedId}")
+    public ResponseEntity<String> unsubscribe(
+            @PathVariable Long subscriberId,
+            @PathVariable Long subscribedId
+    ) {
+        try {
+            subscribeService.unsubscribe(subscriberId, subscribedId);
+            return ResponseEntity.status(HttpStatus.OK).body("구독 취소 완료!");
+        } catch (SubscribeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
 
 
     // 내가 구독한 사람
