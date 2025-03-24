@@ -17,8 +17,17 @@ public class MemberTemplateServiceImpl implements MemberTemplateService {
         this.memberTemplateMapper = memberTemplateMapper;
     }
 
+    // 특정 회원의 모든 템플릿 조회 (본인)
     @Override
-    public List<MemberTemplateDTO> findMemberTemplatePublicAll() {
-        return memberTemplateMapper.selectMemberTemplatePublicAll();
+    public List<MemberTemplateDTO> findMemberTemplates(Long memberId) {
+        return memberTemplateMapper.selectMemberTemplates(memberId);
     }
+
+    // 특정 회원의 공개된 템플릿 조회
+    @Override
+    public List<MemberTemplateDTO> findMemberTemplatePublicAll(Long memberId) {
+        return memberTemplateMapper.selectMemberTemplatePublicAll(memberId);
+    }
+
+    // TODO : 구독중인 회원의 템플릿 조회
 }
