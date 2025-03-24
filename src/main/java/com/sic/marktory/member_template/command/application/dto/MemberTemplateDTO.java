@@ -9,7 +9,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class MemberTemplateDto {
+public class MemberTemplateDTO {
     private Long id;
     private String title;
     private String content;
