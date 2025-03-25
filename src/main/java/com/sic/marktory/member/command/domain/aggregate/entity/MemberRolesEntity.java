@@ -14,7 +14,7 @@ import lombok.*;
 public class MemberRolesEntity {
     @Id
     @Column(name = "member_id")
-    private int memberId;
+    private Long memberId;
     @Column(name = "authority_id")
     private int roleId;
 
