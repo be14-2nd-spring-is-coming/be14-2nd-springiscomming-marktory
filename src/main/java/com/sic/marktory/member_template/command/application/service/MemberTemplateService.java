@@ -6,7 +6,7 @@ import com.sic.marktory.member_template.command.application.dto.MemberTemplateUp
 public interface MemberTemplateService {
 
     // 사용자가 템플릿을 작성
-    Long createMemberTemplate(MemberTemplateCreateRequest request);
+    String createMemberTemplate(MemberTemplateCreateRequest request);
 
     // 사용자 템플릿 수정
     void updateMemberTemplate(Long id, MemberTemplateUpdateRequest request);
