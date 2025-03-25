@@ -117,10 +117,6 @@
 
 <br>
 
-# 테스트 케이스
-
-<br>
-
 # 팀 회고
 ### 주아현
 | Team Member | Peer Review |
