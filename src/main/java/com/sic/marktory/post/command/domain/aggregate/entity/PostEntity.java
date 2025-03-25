@@ -52,4 +52,8 @@ public class PostEntity {
         this.visibility = visibility;
 
     }
+
+    public void postdelete(String deleteDate) {
+        this.deleteDate = deleteDate;
+    }
 }

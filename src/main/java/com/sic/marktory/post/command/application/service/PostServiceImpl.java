@@ -24,7 +24,7 @@ public class PostServiceImpl implements PostService {
     @Transactional
     public Long createPost(PostCreateRequestDTO request) {
         // Visibility 값이 null이면 기본값 "public" 설정
-        String visibilityValue = (request.getVisibility() != null) ? request.getVisibility() : "public";
+        String visibility = (request.getVisibility() != null) ? request.getVisibility() : "public";
 
         // PostEntity 빌드
         PostEntity post = PostEntity.builder()
@@ -33,19 +33,29 @@ public class PostServiceImpl implements PostService {
                 .writtenDate(DateTimeUtil.nowFormatted())
                 .visibility(new Visibility(request.getVisibility())).build();// Visibility Embeddable로 생성
 
-
         return postRepository.save(post).getId();
     }
 
-
-    // 2.게시물 수정
+    // 게시글 삭제
+    @Override
     @Transactional
+    public void deletePost(Long id) {
+        PostEntity delete = postRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("게시물을 찾을 수 없습니다."));
+        // 게시글 삭제
+        delete.postdelete(
+                DateTimeUtil.nowFormatted()
+        );
+    }
+
+    // 게시물 수정
+    @Transactional
+    @Override
     public void updatePost(Long id, PostUpdateRequestDTO request) {
         try {
             // 게시글을 찾지 못한 경우 예외 발생
             PostEntity post = postRepository.findById(id)
                     .orElseThrow(() -> new EntityNotFoundException("게시글을 찾을 수 없습니다."));
-
             // 게시글 업데이트
             post.postupdate(
                     request.getTitle(),
@@ -53,10 +63,8 @@ public class PostServiceImpl implements PostService {
                     new Visibility(request.getVisibility()),
                     DateTimeUtil.nowFormatted()
             );
-
             // 변경된 엔티티 저장
             postRepository.save(post);
-
         } catch (EntityNotFoundException e) {
             // 게시글을 찾지 못한 경우
             throw new EntityNotFoundException("게시글을 찾을 수 없습니다.");  // 다시 던지거나 로그를 추가할 수 있습니다.
@@ -69,9 +77,6 @@ public class PostServiceImpl implements PostService {
         }
     }
 
-
-
-    // 게시물 삭제
 
 
 }
