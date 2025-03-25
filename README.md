@@ -28,12 +28,12 @@
 ### :cherry_blossom: 봄이 5조를 소개합니다. :cherry_blossom:
 <table>
   <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td><img src="./docs/member/Kasey.JPEG" width="150" height="150"/></td>
+    <td><img src="./docs/member/D.JPEG" width="150" height="150"/></td>
+    <td><img src="./docs/member/Alex.JPEG" width="150" height="150"/></td>
+    <td><img src="./docs/member/Morris.JPEG" width="150" height="150"/></td>
+    <td><img src="./docs/member/Dong.png" width="150" height="150"/></td>
+    <td><img src="./docs/member/Tim.jpeg" width="150" height="150"/></td>
   </tr>
   <tr>
     <td>:crown:주아현</td>
@@ -52,7 +52,8 @@
 
 <br>
 
-# 요구 사항 명세서
+# 요구사항 명세서
+![요구사항명세서](./docs/reqDoc/요구사항명세서.png)
 
 <br>
 
@@ -61,6 +62,14 @@
 <br>
 
 # DB 모델링
+### 1️⃣ 플로우차트
+![플로우차트](./docs/flowchart/플로우차트_메인.png)
+
+### 2️⃣ 논리모델링
+![논리모델링](./docs/modeling/논리모델링.png)
+
+### 3️⃣ 물리모델링
+![물리모델링](./docs/modeling/물리모델링.png)
 
 <br>
 
