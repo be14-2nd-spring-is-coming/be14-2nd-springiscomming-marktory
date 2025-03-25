@@ -1,6 +1,7 @@
 package com.sic.marktory.member_template.command.application.service;
 
 import com.sic.marktory.common.DateTimeUtil;
+import com.sic.marktory.common.MarkdownUtil;
 import com.sic.marktory.member_template.command.application.dto.MemberTemplateCreateRequest;
 import com.sic.marktory.member_template.command.application.dto.MemberTemplateUpdateRequest;
 import com.sic.marktory.member_template.command.domain.aggregate.MemberTemplateEntity;
@@ -21,19 +22,23 @@ public class MemberTemplateServiceImpl implements MemberTemplateService {
     // 회원이 템플릿을 작성
     @Override
     @Transactional
-    public Long createMemberTemplate(MemberTemplateCreateRequest request) {
+    public String createMemberTemplate(MemberTemplateCreateRequest request) {
+        String html ="<body><html>" + MarkdownUtil.toHtml(request.getContent()) + "</body></html>";
+
         MemberTemplateEntity template = MemberTemplateEntity.builder()
                 .title(request.getTitle())
-                .content(request.getContent())
+                .content(html)
                 .writtenDate(DateTimeUtil.nowFormatted())
-//                .visibility(new Visibility(request.getVisibility()))
+                .visibility(new Visibility(request.getVisibility()))
                 .usageCount(0)
                 .isCopy('N')
                 // TODO : 회원의 id를 받아서 생성해야 함. 현재는 command 구조 테스트를 위한 코드임.
                 .repositoryId(request.getRepositoryId())
                 .build();
 
-        return memberTemplateRepository.save(template).getId();
+        memberTemplateRepository.save(template);
+
+        return html;
     }
 
     // 회원이 특정 템플릿을 수정

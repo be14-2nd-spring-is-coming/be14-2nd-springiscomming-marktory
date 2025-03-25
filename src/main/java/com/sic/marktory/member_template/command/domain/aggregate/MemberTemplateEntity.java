@@ -24,7 +24,7 @@ public class MemberTemplateEntity {
     private String title;
 
     @Lob
-    @Column(name = "content", nullable = false)
+    @Column(name = "content", nullable = false, columnDefinition = "LONGTEXT")
     private String content;
 
     @Column(name="written_date" , nullable = false)

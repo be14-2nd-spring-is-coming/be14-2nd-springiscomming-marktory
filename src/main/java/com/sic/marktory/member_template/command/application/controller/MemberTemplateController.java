@@ -17,9 +17,10 @@ public class MemberTemplateController {
     // TODO: 템플릿을 작성할 때 회원의 id가 필요. 이 코드에서는 테스트를 위해서 임의로 설정
     // TODO: request 값이 null 인 경우의 처리 필요
     @PostMapping()
-    public ResponseEntity<Long> postCreateMemberTemplate(@RequestBody MemberTemplateCreateRequest request) {
-        Long id = memberTemplateService.createMemberTemplate(request);
-        return ResponseEntity.ok(id);
+    public ResponseEntity<String> postCreateMemberTemplate(@RequestBody MemberTemplateCreateRequest request) {
+        String result = memberTemplateService.createMemberTemplate(request);
+        return ResponseEntity.ok()
+                .header("Content-Type", "text/html").body(result);
     }
 
     @PutMapping("/{id}")
