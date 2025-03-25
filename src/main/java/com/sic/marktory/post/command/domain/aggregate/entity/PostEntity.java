@@ -1,9 +1,11 @@
-package com.sic.marktory.post.command.domain.aggregate;
+package com.sic.marktory.post.command.domain.aggregate.entity;
 
 import com.sic.marktory.category.domain.CategoryEntity;
 import com.sic.marktory.member.command.domain.aggregate.entity.MemberEntity;
+import com.sic.marktory.member_template.command.application.vo.Visibility;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 @Entity
 @Table(name = "post")
@@ -31,8 +33,7 @@ public class PostEntity {
     @Column(name = "delete_date")
     private String deleteDate;   // 변경 가능: LocalDateTime으로 변환 고려
 
-    @Embedded
-    @Column(name = "visibility", nullable = false)
+    @AttributeOverride(name = "value", column = @Column(name = "visibility", nullable = false) )
     private Visibility visibility;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -44,4 +45,11 @@ public class PostEntity {
     private CategoryEntity category;
 
 
+    public void postupdate(String title, String content, Visibility visibility, String writtenDate) {
+        this.title = title;
+        this.content = content;
+        this.writtenDate = writtenDate;
+        this.visibility = visibility;
+
+    }
 }

@@ -6,7 +6,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter @Setter
 @ToString
-public class PostDTO {
+public class PostRequestDTO {
     private Long id;
     private String title;
     private String content;

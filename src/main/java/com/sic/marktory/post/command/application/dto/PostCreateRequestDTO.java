@@ -3,10 +3,11 @@ package com.sic.marktory.post.command.application.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter @Setter
 public class PostCreateRequestDTO {
     private Long id;
     private String title;
