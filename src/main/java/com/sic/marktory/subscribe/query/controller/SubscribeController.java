@@ -2,6 +2,7 @@ package com.sic.marktory.subscribe.query.controller;
 
 import com.sic.marktory.subscribe.query.dto.MemberDTO;
 import com.sic.marktory.subscribe.query.service.SubscribeService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ public class SubscribeController {
 
     private final SubscribeService subscribeService;
 
-    public SubscribeController(SubscribeService subscribeService) {
+    public SubscribeController(@Qualifier("subscribeQueryService") SubscribeService subscribeService) {
         this.subscribeService = subscribeService;
     }
 
