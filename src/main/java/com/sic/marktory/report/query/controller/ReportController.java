@@ -29,8 +29,8 @@ public class ReportController {
     }
 
     // 해당하는 신고 ? 로 이동하여 작성자 id 조회 (어떤 type의 신고인지 따라 동적 쿼리 발생)
-    @GetMapping("/ReportedWriterId")
-    public List<ReportDTO> getReportedWriterId(@RequestParam(value = "type", required = false) String type) {
+    @GetMapping("/reportedWriterId")
+    public List<ReportDTO> getReportedWriterId(@RequestParam(value = "type", required = true) String type) {
         log.info("getReportedWriterId type : {}", type);
 
         if (type == null || type.isBlank()) {

@@ -42,40 +42,45 @@
 
         <choose>
 
-            <when test="type = 'POST'">
+            <when test="type == 'POST'">
                 ,p.id
-                ,p.member_id as p.written_member_id
+                ,p.member_id
             </when>
 
-            <when test="type = 'COMMENT'">
-                c.id
-                ,c.member_id as c.written_member_id
+            <when test="type == 'COMMENT'">
+                ,c.id
+                ,c.member_id
             </when>
 
-            <when test="type = 'TEMPLATE'">
-                t.id
-                ,t.member_id as t.written_member_id
+            <when test="type == 'TEMPLATE'">
+                ,ts.id
+                ,ts.member_id
             </when>
         </choose>
 
         FROM
         <choose>
 
-            <when test="type = 'POST'">post p</when>
+            <when test="type == 'POST'">post p</when>
 
-            <when test="type = 'COMMENT'">comment c</when>
+            <when test="type == 'COMMENT'">comment c</when>
 
-            <when test="type = 'TEMPLATE'">template t</when>
+            <when test="type == 'TEMPLATE'">
+                template_space ts
+                join member_template mt
+                on mt.id=ts.id
+
+            </when>
         </choose>
 
         JOIN report r ON
         <choose>
 
-            <when test="type = 'POST">p.id = r.post_id</when>
+            <when test="type == 'POST'">p.id = r.post_id</when>
 
-            <when test="type = 'COMMENT">c.id = r.comment_id</when>
+            <when test="type == 'COMMENT'">c.id = r.comment_id</when>
 
-            <when test="type = 'TEMPLATE">t.id = r.template_id</when>
+            <when test="type == 'TEMPLATE'">ts.id = r.template_id</when>
         </choose>
 
         WHERE r.type = #{type}
