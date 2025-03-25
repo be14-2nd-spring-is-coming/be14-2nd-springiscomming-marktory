@@ -1,4 +1,4 @@
-# :cherry_blossom: 블로그 서비스(가제) :cherry_blossom:
+# MarKTory
 <br>
 
 # 프로젝트 개요
