@@ -206,34 +206,34 @@ INSERT
 INTO member
 ( email, password, name, nickname, birthday, image, status, black_date, assigned_date, delete_date, report_count, is_terms)
 VALUES
-    ( 'seoyoung.lee@example.com', 'hashed_password_01', '이서영', '서영의공방', '2000-11-11',
+    ( 'seoyoung.lee@example.com', '$2a$12$qRN4y0dTIAyPnLdFzTAIXOnD5HDFXjrXo7MKgzz2YNyss2FjDLbyq', '이서영', '서영의공방', '2000-11-11',
       'https://example.com/images/seoyoung.jpg', 'is_delete', NULL, '2023-05-10 14:23:45', '2024-01-20 09:15:30', 0, TRUE),
 
-    ( 'seojun.oh@example.com', 'hashed_password_02', '오서준', '서준의사진관', '1999-05-10',
+    ( 'seojun.oh@example.com', '$2a$12$T5pZVvXEKxkThFQZN2dUlucO2cQsiR9AL5pJyjeHGgJ6snfr9dADm', '오서준', '서준의사진관', '1999-05-10',
       'https://example.com/images/seojun.jpg', 'is_delete', NULL, '2023-07-15 16:40:20', '2024-02-10 11:05:50', 0, TRUE),
 
-    ( 'junghoon.kim@example.com', 'hashed_password_03', '김정훈', '정훈의운동일기', '1990-07-19',
+    ( 'junghoon.kim@example.com', '$2a$12$KWtci/1Bld/V8ypHElWUs.1N6Lb/ucrHtx4reKN5.wuHI7krmcvRW', '김정훈', '정훈의운동일기', '1990-07-19',
       'https://example.com/images/junghoon.jpg', 'is_black', '2025-01-30 18:20:10', '2023-08-05 10:30:00', NULL, 7, TRUE),
 
-    ( 'dongwoo.park@example.com', 'hashed_password_04', '박동우', '동우의여행기', '1992-06-30', NULL,
+    ( 'dongwoo.park@example.com', '$2a$12$1Fu6TYRaaic64HOEqdkAmeFLtNBiAhOGSXNUU50jFtJmMu7x1YvvK', '박동우', '동우의여행기', '1992-06-30', NULL,
       'is_black', '2025-02-15 20:55:00', '2023-12-20 14:10:15', NULL, 5, TRUE),
 
-    ( 'soyeon.han@example.com', 'hashed_password_05', '한소연', '소연의책방', '1994-12-05', NULL,
+    ( 'soyeon.han@example.com', '$2a$12$FGghs0HHU8Fk2y0BzhBtVuUv3akzXe1dJEqrwnp.Bp.Fns7MIOz9O', '한소연', '소연의책방', '1994-12-05', NULL,
       'is_active', NULL, '2024-01-15 08:45:30', NULL, 2, TRUE),
 
-    ( 'youngho.choi@example.com', 'hashed_password_06', '최영호', '코딩하는영호', '1997-03-14',
+    ( 'youngho.choi@example.com', '$2a$12$BGPLRrCaZPryrCDD01SehuEP444AoEtZgGJhh40.kdchPMLXLZqyK', '최영호', '코딩하는영호', '1997-03-14',
       'https://example.com/images/youngho.jpg', 'is_active', NULL, '2024-02-28 12:05:25', NULL, 0, TRUE),
 
-    ( 'minseok.yoon@example.com', 'hashed_password_07', '윤민석', '민석의하루', '1995-04-23',
+    ( 'minseok.yoon@example.com', '$2a$12$DEoGO.i/553jJ./MNZvVweHDeJchnPCt0Ej1Ok8PRmY0NfIUCNmlC', '윤민석', '민석의하루', '1995-04-23',
       'https://example.com/images/minseok.jpg', 'is_active', NULL, '2024-03-01 21:15:40', NULL, 0, TRUE),
 
-    ( 'jihye.kang@example.com', 'hashed_password_08', '강지혜', '지혜로운생활', '1998-09-17',
+    ( 'jihye.kang@example.com', '$2a$12$/L686p7Jumg4c6bq3mdpJ.MBLSTNwcfCMxGCMLAh79XXw0536Itw2', '강지혜', '지혜로운생활', '1998-09-17',
       'https://example.com/images/jihye.jpg', 'is_active', NULL, '2024-03-05 17:35:55', NULL, 1, TRUE),
 
-    ( 'yuna.song@example.com', 'hashed_password_09', '송유나', '유나의하루', '1996-03-27', NULL,
+    ( 'yuna.song@example.com', '$2a$12$y9QXgAPTj8hv9/8op0BjHO1g/QmhDkOUDpC6UZm9UkqNEXqnS9uWW', '송유나', '유나의하루', '1996-03-27', NULL,
       'is_active', NULL, '2024-06-01 13:50:10', NULL, 0, TRUE),
 
-    ( 'eunji.park@example.com', 'hashed_password_10', '박은지', '은지의요리노트', '2001-01-22', NULL,
+    ( 'eunji.park@example.com', '$2a$12$aANRQsJobsfAd6YbfmO4vuce32R8/ewTk8ig9Tvdn7n6NejjEf7pe', '박은지', '은지의요리노트', '2001-01-22', NULL,
       'is_active', NULL, '2024-09-10 07:25:45', NULL, 1, TRUE);
 
 # 카테고리
