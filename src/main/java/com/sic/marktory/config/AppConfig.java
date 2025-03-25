@@ -22,10 +22,4 @@ public class AppConfig {
         return new BCryptPasswordEncoder();
     }
 
-
-    /* 설명. JavaMailSender */
-    @Bean
-    public JavaMailSender javaMailSender() {
-        return new JavaMailSenderImpl();
-    }
 }

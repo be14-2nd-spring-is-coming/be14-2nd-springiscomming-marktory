@@ -41,6 +41,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
         // 이제 사용자가 입력한 이메일과 암호와 DB의 이메일과 암호가 만남
         // BCrypt 암호 일치하지 않다면, matches 이용 정해진 예외 발생시키기
         if (!passwordEncoder.matches(pwd, userDetails.getPassword())) {
+            log.info("Wrong password");
             throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
         }
 
