@@ -31,8 +31,9 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private Environment env;
 
-    public AuthenticationFilter(AuthenticationManager authenticationManager) {
+    public AuthenticationFilter(AuthenticationManager authenticationManager, Environment env) {
         super(authenticationManager);
+        this.env = env;
     }
 
     /* 설명. 로그인 시도 시 동작하는 기능(POST /login 요청 시), url 노출 방지 post 사용 */
@@ -61,35 +62,35 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
-//        log.info("로그인 성공 이후 spring securiy가 Authentication 객체로 관리 되어 넘어옴: {}", authResult);
-//        /* 설명. 로그인 이후 넘어온 Authentication 객체를 활용해 JWT 토큰 만들기 */
-//        log.info("시크릿 키 : {}", env.getProperty("token.secret"));    // 토큰 생성을 위한 secret key
-//
-//        /* 설명. 토큰의 payload에 (id, 가진 권한들, 만료 시간)을 담을 예정 */
-//        String id = ((User)authResult.getPrincipal()).getUsername();
-//        log.info("회원의 아이디(이메일): {}", id);
-//
-//        List<String> roles = authResult.getAuthorities().stream()
-//                .map(GrantedAuthority::getAuthority)
-//                .collect(Collectors.toList());
-//
-//        log.info("List<String> 형태로 뽑아낸 로그인 한 회원의 권한들: {}", roles);
-//        log.info("만료 시간: {}", env.getProperty("token.expiration_time"));
-//
-//        /* 설명. 이제부터 위에서 추출한 재료들로 JWT Token 제작(JWT 라이브러리 추가) */
-//        // 공개 + 비공개의 클레임을 가지고 조립
-//        Claims claims = Jwts.claims().setSubject(id);
-//        claims.put("auth", roles);
-//
-//        String token = Jwts.builder()
-////                .setSubject(id)
-//                .setClaims(claims)      // 등록된 클레임(subject) + 비공개 클레임(auth)
-//                .setExpiration(new Date(System.currentTimeMillis()
-//                        + Long.parseLong(env.getProperty("token.expiration_time"))))
-//                .signWith(SignatureAlgorithm.HS512, env.getProperty("token.secret"))
-//                .compact();
-//
-//        response.addHeader("token", token);
+        log.info("로그인 성공 이후 spring securiy가 Authentication 객체로 관리 되어 넘어옴: {}", authResult);
+        /* 설명. 로그인 이후 넘어온 Authentication 객체를 활용해 JWT 토큰 만들기 */
+        log.info("시크릿 키 : {}", env.getProperty("token.secret"));    // 토큰 생성을 위한 secret key
+
+        /* 설명. 토큰의 payload에 (id, 가진 권한들, 만료 시간)을 담을 예정 */
+        String id = ((User)authResult.getPrincipal()).getUsername();
+        log.info("회원의 아이디(이메일): {}", id);
+
+        List<String> roles = authResult.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
+
+        log.info("List<String> 형태로 뽑아낸 로그인 한 회원의 권한들: {}", roles);
+        log.info("만료 시간: {}", env.getProperty("token.expiration_time"));
+
+        /* 설명. 이제부터 위에서 추출한 재료들로 JWT Token 제작(JWT 라이브러리 추가) */
+        // 공개 + 비공개의 클레임을 가지고 조립
+        Claims claims = Jwts.claims().setSubject(id);
+        claims.put("auth", roles);
+
+        String token = Jwts.builder()
+//                .setSubject(id)
+                .setClaims(claims)      // 등록된 클레임(subject) + 비공개 클레임(auth)
+                .setExpiration(new Date(System.currentTimeMillis()
+                        + Long.parseLong(env.getProperty("token.expiration_time"))))
+                .signWith(SignatureAlgorithm.HS512, env.getProperty("token.secret"))
+                .compact();
+
+        response.addHeader("token", token);
         log.info("successfulAuthentication");
     }
 }

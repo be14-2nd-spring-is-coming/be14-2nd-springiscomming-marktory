@@ -22,10 +22,14 @@ import java.util.Collections;
 @Slf4j
 public class WebSecurity {
     private JwtAuthenticationProvider jwtAuthenticationProvider;
+    private Environment env;
+    private JwtUtil jwtUtil;
 
     @Autowired
-    public WebSecurity(JwtAuthenticationProvider jwtAuthenticationProvider){
+    public WebSecurity(JwtAuthenticationProvider jwtAuthenticationProvider, Environment env, JwtUtil jwtUtil) {
         this.jwtAuthenticationProvider = jwtAuthenticationProvider;
+        this.env = env;
+        this.jwtUtil = jwtUtil;
     }
 
     @Bean
@@ -40,7 +44,6 @@ public class WebSecurity {
         /* 설명. 허용되는 경로 및 권한 설정 */
         http.authorizeHttpRequests(authz ->
                                 authz.requestMatchers(new AntPathRequestMatcher("/api/member/**", "POST")).permitAll()
-                                        .requestMatchers(new AntPathRequestMatcher("/login", "POST")).permitAll()
                                         .anyRequest().authenticated()
                 )
                 .authenticationManager(authenticationManager())
@@ -49,20 +52,19 @@ public class WebSecurity {
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         // 필터 등록
-        log.info("필터 등록 전 진입");
         http.addFilter(getAuthenticationFilter(authenticationManager()));
 
-//        /* 설명. 로그인 이후 사용자가 들고 온 (request header에 발급받은 bearer 토큰을 들고 옴)
-//            토큰을 검증하기 위한 필터 */
-//        http.addFilterBefore(new JwtFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
-//        log.info("http build 전까지 완료");
+        /* 설명. 로그인 이후 사용자가 들고 온 (request header에 발급받은 bearer 토큰을 들고 옴)
+            토큰을 검증하기 위한 필터 */
+        http.addFilterBefore(new JwtFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
     /* 설명. Filter는 jakarta.servlet으로 import */
     private Filter getAuthenticationFilter(AuthenticationManager authenticationManager) {
-        log.info("진입했음");
-        return new AuthenticationFilter(authenticationManager);
+        AuthenticationFilter filter = new AuthenticationFilter(authenticationManager, env);
+        filter.setFilterProcessesUrl("/api/member/login"); // ✅ 로그인 경로 커스텀
+        return filter;
     }
 
 }
