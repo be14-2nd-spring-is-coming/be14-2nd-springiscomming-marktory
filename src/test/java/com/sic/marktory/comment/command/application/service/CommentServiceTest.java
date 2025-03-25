@@ -2,6 +2,7 @@ package com.sic.marktory.comment.command.application.service;
 
 import com.sic.marktory.comment.command.domain.aggregate.CommentEntity;
 import com.sic.marktory.comment.command.domain.repository.CommentRepository;
+import com.sic.marktory.common.DateTimeUtil;
 import com.sic.marktory.member.command.application.service.MailServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -38,8 +39,8 @@ class CommentServiceTest {
                 .postId(1L)
                 .memberId(5L)
                 .content("댓글 등록 테스트")
-                .writtenDate(LocalDateTime.now())
-                .modifyDate(LocalDateTime.now())
+                .writtenDate(DateTimeUtil.nowFormatted())
+                .modifyDate(DateTimeUtil.nowFormatted())
                 .isDeleted(false)
                 .type(1)
                 .aboveId(null)
@@ -66,8 +67,8 @@ class CommentServiceTest {
                 .postId(1L)
                 .memberId(5L)
                 .content("수정 전 댓글")
-                .writtenDate(LocalDateTime.now())
-                .modifyDate(LocalDateTime.now())
+                .writtenDate(DateTimeUtil.nowFormatted())
+                .modifyDate(DateTimeUtil.nowFormatted())
                 .isDeleted(false)
                 .type(1)
                 .aboveId(null)
@@ -97,8 +98,8 @@ class CommentServiceTest {
                 .postId(1L)
                 .memberId(5L)
                 .content("삭제 전 댓글")
-                .writtenDate(LocalDateTime.now())
-                .modifyDate(LocalDateTime.now())
+                .writtenDate(DateTimeUtil.nowFormatted())
+                .modifyDate(DateTimeUtil.nowFormatted())
                 .isDeleted(false)
                 .type(1)
                 .aboveId(null)
