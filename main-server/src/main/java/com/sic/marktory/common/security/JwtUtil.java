@@ -1,6 +1,6 @@
 package com.sic.marktory.common.security;
 
-import com.sic.marktory.member.query.service.MemberService;
+import com.sic.marktory.member.service.MemberVerifyService;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -27,15 +27,15 @@ import java.util.stream.Collectors;
 public class JwtUtil {
 
     private final Key key;     // 의존성 주입
-    private final MemberService memberService;
+    private final MemberVerifyService memberVerifyService;
     @Autowired
     public JwtUtil(
             @Value("${token.secret}") String secretKey,
-            MemberService memberService
+            MemberVerifyService memberVerifyService
     ) {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         this.key = Keys.hmacShaKeyFor(keyBytes);
-        this.memberService = memberService;
+        this.memberVerifyService = memberVerifyService;
     }
 
     /* 설명. Token 검증(Bearer 토큰이 넘어왔고, 우리가 사이트의 secret key로 만들어 졌는지, 만료 되었는지, 내용이 비어있진 않은지) */
@@ -61,7 +61,7 @@ public class JwtUtil {
         Claims claims = parseClaims(token);
 
         /* 설명. 토큰에 들어있는 이메일로 DB에서 회원 조회하고 UserDetails로 가져옴 */
-        UserDetails userDetails = memberService.loadUserByUsername(claims.getSubject());
+        UserDetails userDetails = memberVerifyService.loadUserByUsername(claims.getSubject());
 
         /* 설명. 토큰에 들어있는 권한들을 List<GrantedAuthority> */
         Collection<GrantedAuthority> authorities = null;

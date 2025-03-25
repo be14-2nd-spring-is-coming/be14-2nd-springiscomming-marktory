@@ -1,7 +1,7 @@
 package com.sic.marktory.common.security;
 
-import com.sic.marktory.common.CommonService;
-import com.sic.marktory.member.query.service.MemberService;
+
+import com.sic.marktory.member.service.MemberVerifyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -19,12 +19,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtAuthenticationProvider implements AuthenticationProvider {
 
-    private CommonService commonService;
+    private MemberVerifyService memberVerifyService;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public JwtAuthenticationProvider(CommonService commonService, PasswordEncoder passwordEncoder) {
-        this.commonService = commonService;
+    public JwtAuthenticationProvider(MemberVerifyService memberVerifyService, PasswordEncoder passwordEncoder) {
+        this.memberVerifyService = memberVerifyService;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -37,7 +37,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
         String pwd = (String)authentication.getCredentials();
 
         /* 설명. 해당 email과 일치하는 DB에서 조회 된 회원 */
-        UserDetails userDetails = commonService.loadUserByUsername(email);
+        UserDetails userDetails = memberVerifyService.loadUserByUsername(email);
 
         // 이제 사용자가 입력한 이메일과 암호와 DB의 이메일과 암호가 만남
         // BCrypt 암호 일치하지 않다면, matches 이용 정해진 예외 발생시키기
