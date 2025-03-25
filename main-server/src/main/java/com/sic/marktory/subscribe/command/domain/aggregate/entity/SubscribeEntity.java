@@ -1,6 +1,6 @@
 package com.sic.marktory.subscribe.command.domain.aggregate.entity;
 
-import com.sic.marktory.member.command.domain.aggregate.entity.MemberEntity;
+import com.sic.marktory.member.entity.MemberEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

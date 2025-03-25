@@ -1,6 +1,6 @@
 package com.sic.marktory.category.domain;
 
-import com.sic.marktory.member.command.domain.aggregate.entity.MemberEntity;
+import com.sic.marktory.member.entity.MemberEntity;
 import jakarta.persistence.*;
 import lombok.*;
 

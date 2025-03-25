@@ -1,7 +1,7 @@
 package com.sic.marktory.post.command.domain.aggregate.entity;
 
 import com.sic.marktory.category.domain.CategoryEntity;
-import com.sic.marktory.member.command.domain.aggregate.entity.MemberEntity;
+import com.sic.marktory.member.entity.MemberEntity;
 import com.sic.marktory.member_template.command.application.vo.Visibility;
 import jakarta.persistence.*;
 import lombok.*;

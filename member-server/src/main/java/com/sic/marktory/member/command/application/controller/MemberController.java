@@ -6,10 +6,22 @@ import com.sic.marktory.member.command.application.dto.MemberDTO;
 import com.sic.marktory.member.command.application.service.MailService;
 import com.sic.marktory.member.command.application.service.MemberService;
 import com.sic.marktory.member.command.domain.aggregate.vo.*;
+<<<<<<< Updated upstream:src/main/java/com/sic/marktory/member/command/application/controller/MemberController.java
 import com.sic.marktory.member.common.exception.NickNameException;
 import com.sic.marktory.member.common.exception.TokenAlreadyVerifiedException;
 import com.sic.marktory.member.common.exception.TokenExpiredException;
 import com.sic.marktory.member.common.exception.TokenNotFoundException;
+<<<<<<< Updated upstream:member-server/src/main/java/com/sic/marktory/member/command/application/controller/MemberController.java
+=======
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+=======
+import com.sic.marktory.common.exception.NickNameException;
+import com.sic.marktory.common.exception.TokenAlreadyVerifiedException;
+import com.sic.marktory.common.exception.TokenExpiredException;
+import com.sic.marktory.common.exception.TokenNotFoundException;
+>>>>>>> Stashed changes:member-server/src/main/java/com/sic/marktory/member/command/application/controller/MemberController.java
+>>>>>>> Stashed changes:src/main/java/com/sic/marktory/member/command/application/controller/MemberController.java
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;

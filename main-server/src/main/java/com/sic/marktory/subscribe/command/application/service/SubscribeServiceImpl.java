@@ -1,7 +1,7 @@
 package com.sic.marktory.subscribe.command.application.service;
 
-import com.sic.marktory.member.command.domain.aggregate.entity.MemberEntity;
-import com.sic.marktory.member.command.domain.repository.MemberRepository;
+import com.sic.marktory.member.entity.MemberEntity;
+import com.sic.marktory.member.repository.MemberRepository;
 import com.sic.marktory.subscribe.command.domain.aggregate.entity.SubscribeEntity;
 import com.sic.marktory.subscribe.command.domain.aggregate.vo.SubscribeRequestVO;
 import com.sic.marktory.subscribe.command.domain.aggregate.vo.SubscribeResponseVO;
