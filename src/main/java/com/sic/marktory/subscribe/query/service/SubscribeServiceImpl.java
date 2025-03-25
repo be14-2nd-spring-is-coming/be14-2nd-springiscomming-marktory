@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("subscribeQueryService")
 public class SubscribeServiceImpl implements SubscribeService {
 
     private final SubscribeMapper subscribeMapper;
