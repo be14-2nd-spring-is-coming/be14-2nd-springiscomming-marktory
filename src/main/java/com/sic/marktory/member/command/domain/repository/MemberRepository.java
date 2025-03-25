@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 /* 설명. member command-repository 구현 */
 @Repository
-public interface MemberRepository extends JpaRepository<MemberEntity, Integer> {
+public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
 
     MemberEntity findByNickname(String nickname);
 }
