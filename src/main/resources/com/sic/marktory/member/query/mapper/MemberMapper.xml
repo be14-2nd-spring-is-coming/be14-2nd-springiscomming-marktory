@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sic.marktory.member.query.mapper.MemberMapper">
+    <!-- 전체 정보 조회(혹시몰라) -->
     <resultMap id="memberMap" type="com.sic.marktory.member.query.dto.MemberDTO">
         <id property="id" column="id"/>
         <result property="email" column="email"/>
@@ -26,6 +27,32 @@
         <result property="role" column="name"/> <!-- 권한 조인 결과 -->
     </resultMap>
 
+    <resultMap id="memberPageMap" type="com.sic.marktory.member.query.dto.MemberPageDTO">
+        <result property="email" column="email"/>
+        <result property="image" column="image"/>
+        <result property="assignedDate" column="assigned_date"/>
+    </resultMap>
+
+    <resultMap id="memberAndPostMap" type="com.sic.marktory.member.query.dto.MemberAndPostDTO">
+        <result property="title" column="title"/>
+        <result property="nickname" column="nickname"/>
+        <result property="content" column="content"/>
+    </resultMap>
+
+    <resultMap id="memberAndCommentMap" type="com.sic.marktory.member.query.dto.MemberAndCommentDTO">
+        <result property="nickname" column="nickname"/>
+        <result property="content" column="content"/>
+        <result property="writtenDate" column="written_date"/>
+    </resultMap>
+
+    <resultMap id="memberAndTemplateMap" type="com.sic.marktory.member.query.dto.MemberAndTemplateDTO">
+        <result property="nickname" column="nickname"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="writtenDate" column="written_date"/>
+        <result property="visibility" column="visibility"/>
+        <result property="isCopy" column="is_copy"/>
+    </resultMap>
     <!-- 2. 3중 조인 문 -->
     <select id="selectMemberWithRoleByEmail" parameterType="string" resultMap="memberWithRoleMap">
         SELECT
@@ -39,4 +66,49 @@
          WHERE A.email = #{email}
     </select>
 
+
+    <!-- 마이페이지 조회하기 -->
+    <select id="selectById" parameterType="_long" resultMap="memberPageMap">
+        SELECT
+               nickname
+             , image
+             , assigned_date
+          FROM member
+         WHERE id = #{id};
+    </select>
+
+    <!-- 마이페이지/추가 기능 내가 작성한 게시글 목록 -->
+    <select id="selectByIdAndPost" parameterType="_long" resultMap="memberAndPostMap">
+        SELECT
+               B.title
+             , A.nickname
+             , B.content
+          FROM member A
+          JOIN post B ON A.id = B.member_id
+         WHERE A.id = #{id}
+    </select>
+    <!-- 마이페이지/추가 기능 내가 작성한 댓글 목록 -->
+    <select id="selectByIdAndComment" parameterType="_long" resultMap="memberAndCommentMap">
+        SELECT
+               A.nickname
+             , B.content
+             , B.written_date
+          FROM member A
+          JOIN comment B ON (A.id = B.member_id)
+         WHERE A.id = #{id};
+    </select>
+    <!-- 마이페이지/ 내 템플릿 저장소 확인 -->
+    <select id="selectByIdAndTemplate" parameterType="_long" resultMap="memberAndTemplateMap">
+        SELECT
+               A.nickname
+             , C.title
+             , C.content
+             , C.written_date
+             , C.visibility
+             , C.is_copy
+          FROM member A
+          JOIN template_space B ON (A.id = B.member_id)
+          JOIN member_template C ON (B.id = C.repository_id)
+         WHERE A.id = #{id};
+    </select>
 </mapper>
