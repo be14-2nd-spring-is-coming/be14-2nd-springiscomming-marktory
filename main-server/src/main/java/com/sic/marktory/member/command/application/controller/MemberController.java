@@ -6,10 +6,10 @@ import com.sic.marktory.member.command.application.dto.MemberDTO;
 import com.sic.marktory.member.command.application.service.MailService;
 import com.sic.marktory.member.command.application.service.MemberService;
 import com.sic.marktory.member.command.domain.aggregate.vo.*;
-import com.sic.marktory.member.common.exception.NickNameException;
-import com.sic.marktory.member.common.exception.TokenAlreadyVerifiedException;
-import com.sic.marktory.member.common.exception.TokenExpiredException;
-import com.sic.marktory.member.common.exception.TokenNotFoundException;
+import com.sic.marktory.common.exception.NickNameException;
+import com.sic.marktory.common.exception.TokenAlreadyVerifiedException;
+import com.sic.marktory.common.exception.TokenExpiredException;
+import com.sic.marktory.common.exception.TokenNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -39,7 +39,7 @@ public class MemberController {
      *  흐름 -> 이메일 전송, 응답으로 토큰 값 전송, 토큰 값을 기준으로 프론트에서 요청-> 백엔드에서 요청 확인
      *  토큰값이 일치 시 -> 회원가입 폼으로 이동시켜 줌
     * */
-    @PostMapping("signup-email")
+    @PostMapping("/signup-email")
     public ResponseEntity<ResponseEmailVO> postSignupEmail(@RequestBody RequestEmailVO email) {
 
         EmailTokenDTO emailTokenDTO = modelMapper.map(email, EmailTokenDTO.class);
@@ -54,7 +54,7 @@ public class MemberController {
     /* 설명. 이메일 토큰 확인
      *  커스텀 예외를 사용해서, 발생시키기
     * */
-    @PostMapping("signup-email/verification")
+    @PostMapping("/signup-email/verification")
     public ResponseEntity<ResponseVerifyTokenVO> postEmailVerification(@RequestBody RequestVerifyTokenVO verifyMemberInfo) {
 
         EmailTokenVerifyDTO emailTokenVerifyDTO = mapper.map(verifyMemberInfo, EmailTokenVerifyDTO.class);
@@ -81,7 +81,7 @@ public class MemberController {
     }
 
     /* 설명. 이메일 토큰 확인이 완료되었다? 회원가입 */
-    @PostMapping("signup")
+    @PostMapping("/signup")
     public ResponseEntity<?> postSingup(@RequestBody RequestSignupVO signupVO) {
         MemberDTO memberDTO = mapper.map(signupVO, MemberDTO.class);
         try {

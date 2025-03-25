@@ -7,7 +7,7 @@ import com.sic.marktory.member.command.domain.aggregate.entity.MemberRolesEntity
 import com.sic.marktory.member.command.domain.repository.EmailRepository;
 import com.sic.marktory.member.command.domain.repository.MemberRepository;
 import com.sic.marktory.member.command.domain.repository.MemberRolesRepository;
-import com.sic.marktory.member.common.exception.NickNameException;
+import com.sic.marktory.common.exception.NickNameException;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
