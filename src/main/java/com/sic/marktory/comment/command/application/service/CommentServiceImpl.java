@@ -4,6 +4,10 @@ import com.sic.marktory.comment.command.application.dto.CommentCreateRequest;
 import com.sic.marktory.comment.command.application.dto.CommentUpdateRequest;
 import com.sic.marktory.comment.command.domain.aggregate.CommentEntity;
 import com.sic.marktory.comment.command.domain.repository.CommentRepository;
+
+import com.sic.marktory.common.DateTimeUtil;
+import jakarta.persistence.EntityNotFoundException;
+
 import com.sic.marktory.comment.common.exception.CommentAlreadyDeletedException;
 import com.sic.marktory.comment.common.exception.CommentNotFoundException;
 import com.sic.marktory.comment.common.exception.EmptyCommentContentException;
@@ -11,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import java.time.LocalDateTime;
 
@@ -30,7 +35,7 @@ public class CommentServiceImpl implements CommentService {
 
         CommentEntity comment = CommentEntity.builder()
                 .content(request.getContent())
-                .writtenDate(LocalDateTime.now().withNano(0))
+                .writtenDate(DateTimeUtil.nowFormatted())
                 .aboveId(request.getAboveId())
                 .type(request.getType())
                 .memberId(request.getMemberId())

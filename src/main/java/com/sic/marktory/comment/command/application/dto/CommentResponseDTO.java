@@ -3,10 +3,6 @@ package com.sic.marktory.comment.command.application.dto;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.util.Date;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

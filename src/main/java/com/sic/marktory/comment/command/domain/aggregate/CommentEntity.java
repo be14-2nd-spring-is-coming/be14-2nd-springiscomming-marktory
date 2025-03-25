@@ -1,12 +1,8 @@
 package com.sic.marktory.comment.command.domain.aggregate;
 
+import com.sic.marktory.common.DateTimeUtil;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 @Entity
 @Table(name="comment")
@@ -24,10 +20,10 @@ public class CommentEntity {
     private String content;
 
     @Column(name="written_date", nullable = false)
-    private LocalDateTime writtenDate;
+    private String writtenDate;
 
     @Column(name="modify_date")
-    private LocalDateTime modifyDate;
+    private String modifyDate;
 
     @Column(name="is_deleted", nullable = false)
     @Builder.Default
@@ -47,7 +43,7 @@ public class CommentEntity {
 
     public void updateContent(String content) {
         this.content = content;
-        this.modifyDate = LocalDateTime.now().withNano(0);
+        this.modifyDate = DateTimeUtil.nowFormatted();
     }
 
     public void softDelete() {
