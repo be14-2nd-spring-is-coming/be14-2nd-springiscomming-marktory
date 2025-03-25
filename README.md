@@ -96,7 +96,7 @@
 ![바운디드컨텍스트이미지](./docs/ddd/bounded.jpg)
 
 ### 2️⃣ Context Mapping
-![컨텍스트매핑이미지](./docs/ddd/mapping.jpg)
+![컨텍스트메핑이미지](./docs/ddd/mapping.jpg)
 
 <br>
 
