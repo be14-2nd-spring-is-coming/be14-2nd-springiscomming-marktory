@@ -30,7 +30,7 @@
         FROM report r
     </select>
 
-<!--    type에 따른 신고 당하는 작성자 조회 -->
+<!--    type에 따라 신고 당하는 작성자 id 조회 -->
     <select id="selectReportedWriterId" resultMap="reportResultMap">
         SELECT
         r.id
@@ -45,16 +45,19 @@
             <when test="type == 'POST'">
                 ,p.id
                 ,p.member_id
+                ,r.post_id
             </when>
 
             <when test="type == 'COMMENT'">
                 ,c.id
                 ,c.member_id
+                ,r.comment_id
             </when>
 
             <when test="type == 'TEMPLATE'">
                 ,ts.id
                 ,ts.member_id
+                ,r.template_id
             </when>
         </choose>
 

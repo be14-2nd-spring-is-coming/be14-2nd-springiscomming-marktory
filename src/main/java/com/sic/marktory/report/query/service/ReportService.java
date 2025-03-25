@@ -23,7 +23,7 @@ public class ReportService {
         return reportMapper.selectAllReports();
     }
 
-    // 신고 당한 ? 의 작성자 조회
+    // 신고 당한 type에 따라 작성자의 id를 조회
     public List<ReportDTO> findReportedWriterId(String type) {
         return reportMapper.selectReportedWriterId(type);
     }
