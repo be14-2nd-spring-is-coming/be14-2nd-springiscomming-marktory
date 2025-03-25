@@ -15,6 +15,8 @@ DROP TABLE IF EXISTS notice;
 DROP TABLE IF EXISTS member_profile_image;
 DROP TABLE IF EXISTS subscribe;
 DROP TABLE IF EXISTS member;
+# 이메일 인증을 위한 email_token 테이블 생성
+DROP TABLE IF EXISTS email_token;
 
 # ---------------------------------------------------- 테이블 생성 ------------------------------------
 
@@ -187,6 +189,15 @@ CREATE TABLE report (
 
 ) ENGINE = INNODB;
 
+# 이메일 토큰 테이블 추가
+CREATE TABLE email_token (
+                        id BIGINT PRIMARY KEY AUTO_INCREMENT,
+                        email VARCHAR(255) NOT NULL,
+                        token VARCHAR(255) NOT NULL,
+                        expiration_time DATETIME,
+                        is_verified BOOLEAN,
+                        UNIQUE(email)
+) ENGINE = INNODB;
 
 # ---------------------------------------------------- 더미 데이터 생성 ------------------------------------
 
