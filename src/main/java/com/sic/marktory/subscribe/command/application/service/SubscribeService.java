@@ -18,4 +18,7 @@ public interface SubscribeService {
 
     // 나를 구독한 사람 목록 조회
     List<SubscribeResponseVO> getMySubscribers(Long subscribedId);
+
+    // 구독 알림 설정 변경
+    void updateNotification(Long subscriberId);
 }

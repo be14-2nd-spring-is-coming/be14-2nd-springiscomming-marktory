@@ -88,7 +88,16 @@ public class SubscribeController {
 
 
     // 구독 알림 전체 변경 (구독한 모든 대상의 알림을 'N'으로 설정)
-    //@PatchMapping("/notification/{subscriberId}")
+    // ! 예외처리 생각..
+    @PatchMapping("/notification/{subscriberId}")
+    public ResponseEntity<String> patchNotification(@PathVariable Long subscriberId) {
+        try {
+            subscribeService.updateNotification(subscriberId);
+            return ResponseEntity.status(HttpStatus.OK).body("구독 알림이 전체 OFF 되었습니다.");
+        } catch (SubscribeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
 
 
 }

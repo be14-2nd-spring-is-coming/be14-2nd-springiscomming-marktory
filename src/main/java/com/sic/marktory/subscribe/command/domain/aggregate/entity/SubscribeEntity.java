@@ -41,4 +41,8 @@ public class SubscribeEntity {
         this.subscribed = subscribed;
         this.isNotification = isNotification;
     }
+
+    public void updateNotification(boolean enable)  {
+        this.isNotification = enable ? 'Y' : 'N';
+    }
 }

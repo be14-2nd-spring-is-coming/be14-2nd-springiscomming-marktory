@@ -101,11 +101,29 @@ public class SubscribeServiceImpl implements SubscribeService{
                 .map(SubscribeResponseVO::new)
                 .collect(Collectors.toList());
 
-        // 3️나를 구독한 사람이 없을 경우 예외 처리
+        // 나를 구독한 사람이 없을 경우 예외 처리
         if (subscribers.isEmpty()) {
             throw new SubscribeException("나를 구독한 사람이 없습니다.");
         }
 
         return subscribers;
+    }
+
+    // 구독 알림 설정 변경
+    @Override
+    public void updateNotification(Long subscriberId) {
+        // 해당 유저가 구독한 모든 구독 정보 가져오기
+        List<SubscribeEntity> subscriptions = subscribeRepository.findAllBySubscriberId(subscriberId);
+
+        // 구독 정보가 없으면 예외 발생
+        if (subscriptions.isEmpty()) {
+            throw new SubscribeException("구독 정보가 존재하지 않습니다.");
+        }
+
+        // 모든 구독 정보의 알림을 'N'으로 변경
+        subscriptions.forEach(subscribe -> subscribe.updateNotification(false));
+
+        // 변경된 정보를 한 번에 저장
+        subscribeRepository.saveAll(subscriptions);
     }
 }
