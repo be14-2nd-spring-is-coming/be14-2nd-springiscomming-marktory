@@ -43,7 +43,10 @@ public class WebSecurity {
 
         /* 설명. 허용되는 경로 및 권한 설정 */
         http.authorizeHttpRequests(authz ->
-                        authz.requestMatchers(new AntPathRequestMatcher("/**/**")).permitAll()
+                        authz.requestMatchers(new AntPathRequestMatcher("/api/member/signup", "POST")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/api/member/signup-email/**", "POST")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/api/member/signup-email", "POST")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/api/member/login", "POST")).permitAll()
                                         .anyRequest().authenticated()
                 )
                 .authenticationManager(authenticationManager())
