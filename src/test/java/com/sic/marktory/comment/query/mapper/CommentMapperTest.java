@@ -1,12 +1,10 @@
 package com.sic.marktory.comment.query.mapper;
 
-import com.sic.marktory.comment.command.domain.aggregate.CommentEntity;
 import com.sic.marktory.comment.query.dto.CommentDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,7 +19,7 @@ class CommentMapperTest {
     private CommentMapper commentMapper;
 
     @Test
-    public void 댓글_조회() {
+    void 댓글_조회_테스트() {
 
         // Given
 
