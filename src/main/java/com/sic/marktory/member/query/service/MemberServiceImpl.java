@@ -1,6 +1,6 @@
 package com.sic.marktory.member.query.service;
 
-import com.sic.marktory.member.query.dto.MemberWithRoleDTO;
+import com.sic.marktory.member.query.dto.*;
 import com.sic.marktory.member.query.mapper.AuthorityMapper;
 import com.sic.marktory.member.query.mapper.MemberMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -53,4 +53,29 @@ public class MemberServiceImpl implements MemberService {
                 true,
                 true, grantedAuthorities);
     }
+
+    @Override
+    public MemberPageDTO findById(Long memberId) {
+        return memberMapper.selectById(memberId);
+    }
+
+    /* 설명. 마이페이지에서 내가 작성한 게시글 조회 완료 */
+    @Override
+    public List<MemberAndPostDTO> findByIdAndPost(Long memberId) {
+        List<MemberAndPostDTO> resultSet = memberMapper.selectByIdAndPost(memberId);
+        return resultSet;
+    }
+
+    @Override
+    public List<MemberAndCommentDTO> findByIdAndComment(Long memberId) {
+        List<MemberAndCommentDTO> resultSet = memberMapper.selectByIdAndComment(memberId);
+        return resultSet;
+    }
+
+    @Override
+    public List<MemberAndTemplateDTO> findByIdAndTemplate(Long memberId) {
+        List<MemberAndTemplateDTO> resultSet = memberMapper.selectByIdAndTemplate(memberId);
+        return resultSet;
+    }
+
 }
