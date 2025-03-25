@@ -5,5 +5,4 @@ FROM post p
          JOIN post_hashtag ph ON p.id = ph.post_id
          JOIN hashtag h ON ph.hashtag_id = h.id
 WHERE h.name = ? #{hashtagName}
-  AND p.visibility != 'public'
 ORDER BY p.written_date DESC;
