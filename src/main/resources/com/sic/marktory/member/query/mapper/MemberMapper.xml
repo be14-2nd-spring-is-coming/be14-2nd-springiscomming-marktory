@@ -23,7 +23,7 @@
         <id property="id" column="id"/>
         <result property="email" column="email"/>
         <result property="password" column="password"/>
-        <result property="role" column="authority"/> <!-- 권한 조인 결과 -->
+        <result property="role" column="name"/> <!-- 권한 조인 결과 -->
     </resultMap>
 
     <!-- 2. 3중 조인 문 -->
