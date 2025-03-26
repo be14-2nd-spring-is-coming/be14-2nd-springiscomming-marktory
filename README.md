@@ -34,12 +34,13 @@
 4. [요구사항 명세서](#요구사항-명세서)
 5. [DDD](#DDD)
 6. [DB 모델링](#DB-모델링)
-7. [서버 구조](#서버-구조)
+7. [프로젝트 아키텍쳐](#프로젝트-아키텍쳐)
+8. [API명세서](#API-명세서)
 8. [API Test](#API-Test)
-9. [테스트 케이스](#테스트-케이스)
+9. [TestCase](#TestCase)
 10. [팀 회고](#팀-회고)
 
-# 📌 개요
+# 📌개요
 
 > 자기 PR의 시대, 나만의 개발자 공간을 만들다. 지루한 기술 블로그에서 벗어나 자유롭게 글을 작성하고, 나만의 스타일로 PR할 수 있는 공간!
 > MarkTory는 Markdown 기반으로 간편하게 블로그를 운영하고, 개발자 간 소통과 네트워킹을 지원합니다. 기술을 공유하는 것에서 한 걸음 더 나아가, 커스텀 템플릿을 통해 나만의 색깔을 표현하고 성잘할 수 있는 커뮤니티를 제공합니다. 이제 개발자의 글쓰기는 단순한 기록이 아닌, 개인의 브랜딩과 연결되는 새로운 경험이 됩니다. 쉽고 자유로운 글쓰기, 더 넓은 개발자 네트워크! 지금 MarkTory와 함께 나만의 공간을 만들어보세요.
@@ -113,16 +114,189 @@
 
 <br>
 
-# 서버 구조
+# 프로젝트 아키텍쳐
+- Project Server 구조
 ![아키텍쳐이미지](./docs/architecture/server.jpg)
+- Eureka Server
+![유레카서버이미지](./docs/architecture/eureka_server.png)
+
+<br>
+
+# API 명세서
+## 📍 Swagger-UI
+<details>
+ <summary>Member Template</summary>
+  <img src="./docs/swagger/swagger/swagger02.png" width=700>
+</details>
+<details>
+ <summary>Post</summary>
+  <img src="./docs/swagger/swagger/swagger03.png" width=700>
+</details>
+<details>
+ <summary>Comment</summary>
+  <img src="./docs/swagger/swagger/swagger01.png" width=700>
+</details>
+<details>
+ <summary>Report</summary>
+  <img src="./docs/swagger/swagger/swagger04.png" width=700>
+</details>
+<details>
+ <summary>Subscribe</summary>
+  <img src="./docs/swagger/swagger/swagger05.png" width=700>
+</details>
 
 <br>
 
 # API Test
+## 📍 01_Member
+<details>
+ <summary> 회원가입 인증 이메일 전송</summary>
+  <img src="./docs/APITest/member/member01.png" width=700>
+  <img src="./docs/APITest/member/member02.png" width=700>
 
+- 일반 회원 토큰  
+  <img src="./docs/APITest/member/member03.png" width=700>
+
+- 회원 가입 인증 실패
+  <img src="./docs/APITest/member/member04.png" width=700>
+</details>
+<details>
+ <summary>회원 가입 인증 완료</summary>
+  <img src="./docs/APITest/member/member05.png" width=700>
+
+- 회원 가입 인증 실패
+  <img src="./docs/APITest/member/member06.png" width=700>
+</details>
+<details>
+ <summary>회원 가입</summary>
+  <img src="./docs/APITest/member/member07.png" width=700>
+</details>
+<details>
+ <summary>로그인</summary>
+  <img src="./docs/APITest/member/member08.png" width=700>
+</details>
+<details>
+ <summary>관리자 로그인</summary>
+  <img src="./docs/APITest/member/member09.png" width=700>
+</details>
+<details>
+ <summary>마이페이지에서 닉네임, 프로필사진 조회</summary>
+  <img src="./docs/APITest/member/member10.png" width=700>
+</details>
+<details>
+ <summary>마이페이지에서 내가 작성한 댓글 조회</summary>
+  <img src="./docs/APITest/member/member11.png" width=700>
+</details>
+<details>
+ <summary>마이페이지에서 내가 작성한 템플릿 조회</summary>
+  <img src="./docs/APITest/member/member12.png" width=700>
+</details>
+
+## 📍 02_Member_Templates
+<details>
+ <summary>특정 회원 모든 공개 템플릿 조회</summary>
+  <img src="./docs/APITest/m_templates/m_templates01.png" width=700>
+</details>
+<details>
+ <summary> 특정 회원 모든 템플릿 조회</summary>
+  <img src="./docs/APITest/m_templates/m_templates02.png" width=700>
+</details>
+<details>
+ <summary> 템플릿 생성 </summary>
+ 
+- 요청
+  <img src="./docs/APITest/m_templates/m_templates03.png" width=700>
+- 결과(서버에서 HTML 코드 생성 후 반환)
+  <img src="./docs/APITest/m_templates/m_templates03.png" width=700>
+</details>
+<details>
+ <summary> 템플릿 수정  </summary>
+  <img src="./docs/APITest/m_templates/m_templates05.png" width=700>
+</details>
+<details>
+ <summary> 템플릿 삭제</summary>
+  <img src="./docs/APITest/m_templates/m_templates06.png" width=700>
+</details>
+
+## 📍 03_Post
+<details>
+ <summary> 현재 공개 게시물 모두 조회 </summary>
+  <img src="./docs/APITest/post/post_01.png" width=700>
+</details>
+<details>
+ <summary> 게시글 작성</summary>
+  <img src="./docs/APITest/post/post_02.png" width=700>
+</details>
+<details>
+ <summary> 게시글 삭제 </summary>
+  <img src="./docs/APITest/post/post_03.png" width=700>
+</details>
+
+## 📍 04_Comment
+<details>
+ <summary> 댓글 조회 </summary>
+  <img src="./docs/APITest/comment/comment1.png" width=700>
+</details>
+<details>
+ <summary> 댓글 작성</summary>
+  <img src="./docs/APITest/comment/comment2.png" width=700>
+</details>
+<details>
+ <summary> 댓글 수정</summary>
+  <img src="./docs/APITest/comment/comment3.png" width=700>
+</details>
+<details>
+ <summary> 댓글 삭제</summary>
+  <img src="./docs/APITest/comment/comment4.png" width=700>
+</details>
+
+## 📍 05_Report
+<details>
+ <summary> 신고 전체 조회 </summary>
+  <img src="./docs/APITest/report/report1.png" width=700>
+</details>
+<details>
+ <summary> 피신고자 조회 </summary>
+  <img src="./docs/APITest/report/report2.png" width=700>
+</details>
+
+## 📍 06_Subscribe
+<details>
+ <summary> 구독 요청 </summary>
+  <img src="./docs/APITest/subscribe/sub1.png" width=700>
+  <img src="./docs/APITest/subscribe/sub2.png" width=700>
+</details>
+<details>
+ <summary> 구독 알림 끄기 </summary>
+  <img src="./docs/APITest/subscribe/sub3.png" width=700>
+</details>
+<details>
+ <summary> 구독 중인 회원 조회 </summary>
+  <img src="./docs/APITest/subscribe/sub4.png" width=700>
+</details>
+<details>
+ <summary> 내 구독자 조회 </summary>
+  <img src="./docs/APITest/subscribe/sub5.png" width=700>
+</details>
+<details>
+ <summary> 구독한 회원 정보 조회</summary>
+  <img src="./docs/APITest/subscribe/sub6.png" width=700>
+</details>
+<details>
+ <summary> 구독 취소 </summary>
+    구독 해지하는 회원 ID, 구독 대상 ID
+  <img src="./docs/APITest/subscribe/sub7.png" width=700>
+  <img src="./docs/APITest/subscribe/sub8.png" width=700>
+</details>
 <br>
 
-# 테스트_케이스
+# TestCase
+
+- Test Code
+![Test code_comment](./docs/test/comment_updateCode.png)
+- Test Summary
+![Test Summary_comment](./docs/test/commentTest.png)
+
 
 
 # 팀 회고
@@ -139,7 +313,7 @@
 | Team Member | Peer Review |
 |-------------|------------|
 | 주아현       | 프로젝트를 진행하며 어떤 일이든 믿고 맡길 수 있는 든든한 팀원입니다. 마크토리 기획부터 문서작업, 백엔드 개발, 발표 PPT까지 맡은 부분을 빈틈없이 완성할 수 있는 역량을 갖췄다고 생각합니다. 특히 구독 기능에 고민할 부분이 많았음에도 기능 구현 및 예외처리까지 섬세하게 개발해주어 옆에서 보고 많이 배울 수 있었습니다. 촉박한 기간임에도 백마디 말보다 한 번의 행동으로 보여주는 ‘디’ 덕분에 프로젝트를 잘 마칠 수 있었습니다. 감사합니다!!    |
-| 곽우석       | 평가       |
+| 곽우석       | 문서 작업과 개발은 물론, PPT까지 뛰어난 실력을 보여주셨습니다. 며칠 밤을 새워가며 책임감 있게 작업하시는 모습과 점심도 굶으며 작업에 몰입하시는 모습이 인상적이었습니다. 제가 부족한 부분에서 항상 정답을 알고 계셨고, 친절하게 설명해 주시는 모습에서 좋은 분이라는 걸 느꼈습니다. 또한 작업이 막혀 우울했던 순간마다 장난스러운 말들과 따뜻한 격려로 큰 힘이 되어주셔서 정말 감사했습니다.     |
 | 이상모       | 문서 작업부터(플로우차트, 모델링, PPT등) 실무 개발까지 모자람 없이 완벽에 가깝게 처리하는 점이 놀라웠습니다. 특히 짧은 개발 시간 안에 스프링은 처음 하는 것일 텐데 구독 시스템을 예외처리까지 잘 처리해주셔서 배울점도 많았습니다.       |
 | 정동한       | PPT 디자인에서 강점을 보인 팀원입니다. 사소한 부분을 놓치지 않고 체크하는 부분이 좋은 자세을 가졌습니다. 프로세스에 대한 순서도도 혼자 만들고, 어쩌면 협업에서 필요한 부분 중 하나인 문서화에 대해서는 완성이 되어있다고 생각이 드는 팀원이였습니다. 구독 시스템의 api 명세가 완성도가 높았기에 이미 문서화 + 개발의 완성도 높은 개발자로 다가가고 있는 팀원입니다.       |
 | 한윤상       | 누가 시키지 않아도 항상 먼저 해야 할 일을 파악하고 조용히 처리해주는 모습이 반복될수록, 팀 전체가 점점 더 믿고 의지하게 되는 분위기가 자연스럽게 만들어졌습니다. 특히 문서 작성과 PPT 제작에 있어서는 말 그대로 압도적인 능력을 보여주셨습니다. 단순히 예쁘고 보기 좋은 수준을 넘어서, 프로젝트의 구조와 흐름을 일관성 있게 담아낼 줄 아는 분이었고, 발표 준비에서도 큰 중심을 잡아주셨습니다. 개발 외에도 팀 전반의 기록을 챙기고, 자료 하나하나에 세심하게 신경 써준 덕분에 결과물의 완성도가 확연히 올라갔다고 생각합니다. 무엇보다 인상 깊었던 건, 몸도 마음도 힘들 법한 상황 속에서도 늘 프로젝트를 우선순위에 두고 묵묵히 자신의 역할을 해주신 점이었습니다. 손이 닿지 않은 부분이 없었고, 그 조용한 노력 덕분에 팀이 흔들림 없이 끝까지 나아갈 수 있었습니다. 팀원 모두에게 큰 버팀목이 되어주었고, 함께할 수 있어서 정말 든든했습니다.       |
@@ -158,7 +332,7 @@
 |-------------|------------|
 | 주아현       | 프로젝트 기획 단계부터 팀원들의 사고를 넓게 열어주신 감사한 팀원입니다. 팀 내에서 의견이 분분할 때 중심을 잘 잡을 수 있도록 여러 해결책들을 던져주셔서 혼란스러운 상황을 피할 수 있었습니다. 특히 Github협업 툴에 대한 지식을 팀원분들에게 공유해주셔서 협력적으로 개발할 수 있었습니다. 모님의 꾸준히 탐구하는 자세를 보고 옆에서 많이 배울 수 있었습니다! 더불어 특유의 재치 있는 언어로 팀 분위기를 밝혀주셔서 프로젝트 기간이 즐거웠습니다. 정말 고생 많으셨습니다!       |
 | 강이도은      | 항상 소통의 중요성을 상기시켜주고, 협업에 대한 룰을 가장 잘 지키며 꼼꼼하게 세우고자 하셨습니다. 다양하고 좋은 아이디어도 많이 내시고, 매번 생각의 틀에 갇히려 할 때 꺼내주는 고마운 분입니다. 특히, 개인의 생각을 열린 결말로 존중해 주셔서 능동적인 태도를 가지게 도와주셨습니다. 또, 사소한 질문이어도 새로운 지식이 나타날 때에 끝없이 파고 드려 하시고, 팀원들에게 유용할 것 같은 정보들을 다 공유해 주셨습니다. 모리스 덕분에 팀의 원활한 소통과 의견 공유, 현재 필요한 팀의 방향성을 잘 잡히지 않았나 싶습니다. 가끔 튀어나오는 무미건조한 농담도 너무 재밌습니다!!      |
-| 곽우석       | 평가       |
+| 곽우석       | 저희 팀의 분위기 메이커, Morris! 모두가 지쳐 있는 순간에도 덕분에 웃을 일이 많았던 것이 기억에 남습니다. 개발 실력은 두말할 것도 없이 뛰어나셨습니다. 저는 손도 대지 못할 부분에서도 완벽한 결과물을 만들어내시는 모습이 정말 신처럼 느껴졌어요..! 또한, 제가 모르는 부분을 자주 질문했음에도 귀찮은 기색 없이 자신의 일처럼 친절하게 설명해 주시는 모습에 감동의 눈물이 찔끔 났습니다. 약 한 달 동안 Morris 덕분에 좋은 기억만 가득했습니다. 정말 감사합니다! 😊       |
 | 정동한       | 상모님이 없으셨다면, 기능들이 세세하게 나오고, 그 기능을 기준으로 프로젝트에서 강점을 가질 수 있었을까라는 생각이 듭니다. Swagger나 API 문서화 정리, 그리고 템플릿에서 html 적용이라는 어려운 부분을 맡으셨고 그 부분이 주요 기능이였는데 정말 잘 완성해주셨고, 한번씩 분위기 환기도 잘 해주시는 모습이 봄이 5조의 핵심 팀원이였다라고 볼 수 있는 팀원이였습니다.       |
 | 한윤상       | 현업 경험을 바탕으로, 논의의 깊이를 한 단계 더 끌어올려준 팀원이었습니다. 매번 회의 때마다 우리끼리 놓치고 있던 실질적인 사용자 관점이나 협업 구조에 대한 인사이트를 던져주셨고, 덕분에 논의가 현실적이면서도 넓은 시야로 이어질 수 있었습니다. 기능 하나를 정할 때도 그 목적과 구조에 대해 생각하게끔 유도해주셔서, 개발뿐만 아니라 사고의 방식 자체를 다르게 만들어준 분이었습니다. 동시에 조용히 웃긴 분이기도 했습니다. 말투는 늘 차분하고 진지한데, 툭툭 던지는 말들이 은근히 팀원들 웃게 만들어서 회의 분위기가 경직되지 않고 부드럽게 흘렀던 것도 기억에 많이 남습니다. API 문서화, swagger 정리처럼 섬세한 작업을 맡아주시면서도, 팀원들이 고민하는 부분에 끊임없이 아이디어를 제시해주셨고, 배려와 책임감을 동시에 갖춘 팀원이였습니다.      |
 
@@ -167,7 +341,7 @@
 |-------------|------------|
 | 주아현       | 프로젝트를 진행하며 발견하는 문제점들을 긍정적인 시각으로 바라보고 여러 방면으로 해결하고자 노력하는 모습이 멋진 팀원이었습니다. 특히 회원 기능과 MSA, Security 권한 등 여러 주요 부분을 담당하여 개발하셨습니다. 마감이 촉박한 시간임에도 포기하지 않고 담당한 부분들을 끝까지 책임지고 해내는 모습들이 개발자로서 배울 점이 정말 많다고 느꼈습니다. 덕분에 프로젝트를 완성도 있게 잘 마칠 수 있었습니다. 동님의 수고에 감사합니다!!       |
 | 강이도은      | 봄이오조의 GPT 아닐까 싶습니다. 1 정도의 질문에 10의 대답과 본인이 알고 있는 최대한의 정보 공유를 해주셔서 정말 많은 도움이 되었고, 공부 의지를 불태울 수 있었습니다. 이번에 회원, 권한과 관련된 어려운 부분을 맡으셨는데, 본인의 욕심이라며 책임감을 가지고 임해주셔서 이번 프로젝트가 수월하게 흘러갔던 것 같습니다. 되게 신기했던 점은 저는 사용자 차원에서 생각을 한다면, Dong님은 개발자 차원에서 생각을 한다는 점인데요. 덕분에 저희 서비스에서 구현 가능한 것과 필요한 것들을 잘 챙겨 갈 수 있었습니다. 안된다는 것보다는 일단 해볼게요 라고 하시고, 진짜 해오는 모습 최고였습니다. 동 믿습니다.      |
-| 곽우석       | 평가       |
+| 곽우석       | 맡은 역할에 최선을 다하며 밤을 새워서라도 끝내 완성해내는 모습에서 강한 책임감이 느껴졌고, 그 모습에 깊이 감명받았습니다. 또한, 많은 지식을 가졌음에도 과시하거나 잘난 체하는 대신, 그 실력으로 팀원들을 도와주고 자신의 일에도 끊임없이 열정을 쏟는 모습이 인상적이었습니다. Dong 덕분에 많은 도움을 받았고, 당분간 저의 롤모델은 단연 Dong일 것 같습니다! 😊       |
 | 이상모       | 개발자라면 이래야 되지 않을까 라는 생각을 들게 만든 팀원 이였습니다. 피드백에 대한 열린 태도는 물론이고, 문제 해결에 대한 집요함과 적절한 판단력, 잘 모르는 영역에 대한 도전 정신까지 갖고 계셨습니다. 특히 MSA 구현과 그에 관련된 설정들을 개발 기한까지 결국엔 해낸 부분이 인상 깊었습니다.       |
 | 한윤상       | ‘진짜 개발자’라는 말이 딱 어울리는 분이었습니다. 회원 시스템, MSA, Security 등 가장 복잡하고 어려운 파트임에도 스스로 먼저 맡겠다고 해주셨고, 실제로 그 파트를 빠짐없이 끝까지 완성해주신 덕분에 우리 프로젝트가 제대로 굴러갈 수 있었습니다. 하나를 물으면 열을 알려주려는 그 태도 덕분에 자극받고 더 배우고 싶다는 동기를 얻었습니다. 기술적인 역량도 뛰어나지만, 문제 해결을 향한 집요함과 공유하려는 마음까지 갖춘 분이기에 프로젝트가 잘 마무리 될 수 있었다고 생각합니다.      |
 
@@ -176,6 +350,6 @@
 |-------------|------------|
 | 주아현       | 팀 내에 논의 시 필요한 일이라면 자신의 의견을 분명하게 나타내어 팀의 방향성에 도움을 주었습니다. 프로젝트 내에서 작은 일, 큰일 구분하지 않고 필요한 부분이라면 나서서 담당했고 묵묵히 맡은 바를 책임지고 해내는 모습에 감사했습니다. 더불어 본인의 의견 및 태도를 항시 스스로 돌아보고 피드백 하시는 모습이 타인에 대한 배려심이라 생각되었고 제가 배울 점이라 느꼈습니다. 고생 많으셨습니다!!      |
 | 강이도은      | 가장 번거로웠던 문서의 틀을 다 작성해 주시고, 많이 도와주셔서 감사합니다! 팀원들을 잘 서포트 해주어 어쩌면 이번 프로젝트에서 현 상황을 제일 이해를 잘 하고 있지 않을까 생각이 듭니다. 의견이 오고 갈 때는, 모두의 상황을 깊게 생각해 보고 현재 상황에서 가장 합리적인 의견을 내주었습니다. 덕분에 모두가 납득을 하고, 자칫 언쟁까지 이어질 상황을 막아주었던 것 같습니다. 프로젝트 시 칼퇴 없이 모든 일정을 팀에 우선시해주었습니다, 또, 본인이 맡은 도메인도 책임감 있게 개발하시고 더 나아가 테스트 코드까지 개발한 모습 인상 깊었습니다!       |
-| 곽우석       | 평가       |
+| 곽우석       | 저의 짝꿍 Tim! 매일 함께했지만, 단 한 번도 불편함을 느낀 적 없는, 함께 있는 것만으로도 편안함을 주는 팀원이었습니다. 아침마다 학원에 가장 먼저 도착하는 성실함은 물론, 프로젝트 기간 내내 묵묵히 자신의 역할을 완수하는 모습이 마치 든든한 버팀목과 같았습니다. Tim에게 많은 부분을 물어보면서도 바쁜 와중에 방해가 될까 미안했지만, 언제나 친절하게 설명해 주셔서 정말 감사했습니다!        |
 | 이상모       | 항상 묵묵히 본인이 맡은 도메인에 대해서 끝까지 책임지며 개발 하셨고, 팀원들과 논의 시간에 현실적인 의견을 내며 유연한 자세로 팀원들과 토론을 하여 불필요한 시간낭비를 발생하지 않게 한거 같습니다. 군더더기 없는 깔끔함? 이라는 느낌 이였습니다.       |
 | 정동한       | 팀장님과 팀원들을 도와줄 수 있는 뒤에서 고생을 많이 한 팀원이라고 생각합니다. 하기 귀찮다라고 생각하는 작업들을 세심하게 잘 수행해주었고, 문서나 리드미에서 작업과 깔끔한 코드 작성으로 서포팅을 잘 수행한 팀원이라고 생각합니다. 또한 팀원들의 기분도 생각할 줄 아는 모습이 좋은 서포팅이였다고도 생각합니다. 회의록과 피드백에 대한 정리에 감사하다고 전하고 싶습니다!       |
