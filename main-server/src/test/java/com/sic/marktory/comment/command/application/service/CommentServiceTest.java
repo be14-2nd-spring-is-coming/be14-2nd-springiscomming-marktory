@@ -3,13 +3,11 @@ package com.sic.marktory.comment.command.application.service;
 import com.sic.marktory.comment.command.domain.aggregate.CommentEntity;
 import com.sic.marktory.comment.command.domain.repository.CommentRepository;
 import com.sic.marktory.common.DateTimeUtil;
-import com.sic.marktory.member.command.application.service.MailServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,9 +25,6 @@ class CommentServiceTest {
 
     @Autowired
     private CommentRepository commentRepository;
-
-    @MockBean
-    private MailServiceImpl mailService;
 
     @Test
     void 댓글_등록_테스트() {

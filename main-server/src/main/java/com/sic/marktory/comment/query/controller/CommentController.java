@@ -14,7 +14,7 @@ import java.util.List;
 
 @Tag(name="Comment Query", description = "조회")
 @RestController("queryCommentController")
-@RequestMapping("api/comment")
+@RequestMapping("/api/comment")
 @Slf4j
 public class CommentController {
 

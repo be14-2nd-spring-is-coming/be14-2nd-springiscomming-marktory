@@ -42,13 +42,29 @@ public class WebSecurity {
         http.csrf(csrf -> csrf.disable());
 
         /* 설명. 허용되는 경로 및 권한 설정 */
-        http.authorizeHttpRequests(authz ->
-                        authz.requestMatchers(new AntPathRequestMatcher("/api/report/reports/"))
-                                .hasRole("ADMIN")
-                                .requestMatchers("/api/report/reportedWriterId")
-                                .hasRole("ADMIN")
-                                .anyRequest().authenticated()
+        http.authorizeHttpRequests(authz -> authz
+                .requestMatchers(new AntPathRequestMatcher("/**/**")).permitAll()
+//                .requestMatchers(new AntPathRequestMatcher("/api/report/reports/")).hasRole("ADMIN")
+//                .requestMatchers(new AntPathRequestMatcher("/api/report/reportedWriterId")).hasRole("ADMIN")
+//                .requestMatchers(new AntPathRequestMatcher("/v3/api-docs/**")).permitAll()
+//                .requestMatchers(new AntPathRequestMatcher("/v3/api-docs")).permitAll()
+//                .requestMatchers(new AntPathRequestMatcher("/swagger-ui/**")).permitAll()
+//                .requestMatchers(new AntPathRequestMatcher("/swagger-ui.html")).permitAll()
+//                .requestMatchers(new AntPathRequestMatcher("/swagger-resources/**")).permitAll()
+//                .requestMatchers(new AntPathRequestMatcher("/webjars/**")).permitAll()
+                .anyRequest().authenticated()
                 )
+//                                .requestMatchers("/api/report/reportedWriterId")
+//                                .hasRole("ADMIN")
+//                                .requestMatchers(
+//                                        "/v3/api-docs/**",
+//                                        "/swagger-ui/**",
+//                                        "/swagger-ui.html",
+//                                        "/swagger-resources/**",
+//                                        "/webjars/**"
+//                                ).permitAll()
+//                                .anyRequest().authenticated()
+//                )
                 .authenticationManager(authenticationManager())
 
                 /* 설명. Session을 쓰지 않고 Jwt토큰 방식으로 LocalThread에 저장하겠다는 설정 */
