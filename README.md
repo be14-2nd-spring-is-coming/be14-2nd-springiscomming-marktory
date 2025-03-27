@@ -107,12 +107,12 @@
 
 <br>
 
-# WBS (https://docs.google.com/spreadsheets/d/1Fo4dbNoZw4fOaGpFP54IiKlQQwziKJoDIP2-uSstzzg/edit?usp=sharing)
+# [WBS](https://docs.google.com/spreadsheets/d/1Fo4dbNoZw4fOaGpFP54IiKlQQwziKJoDIP2-uSstzzg/edit?usp=sharing)
 ![WBS이미지](./docs/wbs/wbs.png)
 
 <br>
 
-# 요구사항 명세서 (https://docs.google.com/spreadsheets/d/1yIbZjcO_11O52FWxNXQUNZFIGag_PA7eXX80ekW4n4o/edit?usp=sharing)
+# [요구사항 명세서](https://docs.google.com/spreadsheets/d/1yIbZjcO_11O52FWxNXQUNZFIGag_PA7eXX80ekW4n4o/edit?usp=sharing)
 ![요구사항명세서이미지](./docs/reqDoc/요구사항명세서.png)
 
 <br>
