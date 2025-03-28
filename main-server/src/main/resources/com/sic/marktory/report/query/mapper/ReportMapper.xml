@@ -13,32 +13,35 @@
         <result property="postId" column="post_id"/>
         <result property="commentId" column="comment_id"/>
         <result property="templateId" column="template_id"/>
+        <result property="name" column="name"/>
+        <result property="reportCount" column="report_count"/>
+
     </resultMap>
 
-<!--    전체 신고 내역 조회-->
+    <!--    전체 신고 내역 조회-->
     <select id="selectAllReports" resultMap="reportResultMap">
         SELECT
-               r.id
-             , r.content
-             , r.status
-             , r.date
-             , r.type
-             , r.member_id
-             , r.post_id
-             , r.comment_id
-             , r.template_id
-          FROM report r
+        r.id
+        , r.content
+        , r.status
+        , r.date
+        , r.type
+        , r.member_id
+        , r.post_id
+        , r.comment_id
+        , r.template_id
+        FROM report r
     </select>
 
-<!--    type에 따라 신고 당하는 작성자 id 조회 -->
+    <!--    type에 따라 신고 당하는 작성자 id 조회 -->
     <select id="selectReportedWriterId" resultMap="reportResultMap">
         SELECT
-               r.id
-             , r.content
-             , r.status
-             , r.date
-             , r.type
-             , r.member_id
+        r.id
+        , r.content
+        , r.status
+        , r.date
+        , r.type
+        , r.member_id
         <choose>
 
             <when test="type == 'POST'">
@@ -71,7 +74,7 @@
             <when test="type == 'TEMPLATE'">
                 template_space ts
                 JOIN member_template mt
-                  ON mt.id = ts.id
+                ON mt.id = ts.id
 
             </when>
         </choose>
@@ -87,5 +90,15 @@
         </choose>
 
         WHERE r.type = #{type}
+    </select>
+
+    <!--    누적 신고 3회 이상 회원 조회 -->
+    <select id="selectReportedMemberId" resultMap="reportResultMap">
+        SELECT
+          m.id
+        , m.name
+        , m.report_count
+          FROM member m
+         WHERE report_count >= 3;
     </select>
 </mapper>
