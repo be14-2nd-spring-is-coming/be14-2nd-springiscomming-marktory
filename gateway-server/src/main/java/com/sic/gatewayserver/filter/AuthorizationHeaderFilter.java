@@ -37,9 +37,15 @@ public class AuthorizationHeaderFilter
         return (exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
 
+            /* 설명. test 프로필일 경우 토큰 없이 통과하도록 설정 */
+            if (isTestProfileActive()) {
+                log.info("test 프로필 - Gateway 토큰 검증 우회");
+                return chain.filter(exchange);
+            }
+
             /* 설명. request header에 "Authorization"이라는 키 값이 없다면 토큰 없이 요청이 온 것으로 판단 */
-            if(!request.getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
-                return onError(exchange, "No autorization header", HttpStatus.UNAUTHORIZED);
+            if (!request.getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
+                return onError(exchange, "No authorization header", HttpStatus.UNAUTHORIZED);
             }
 
             /* 설명. 토큰을 들고 왔다면 추가 검증 */
@@ -57,7 +63,7 @@ public class AuthorizationHeaderFilter
             String bearerToken = request.getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
             String jwt = bearerToken.replace("Bearer ", "");
 
-            if(!isJwtValid(jwt)) {
+            if (!isJwtValid(jwt)) {
                 return onError(exchange, "JWT token is not valid", HttpStatus.UNAUTHORIZED);
             }
 
@@ -88,6 +94,10 @@ public class AuthorizationHeaderFilter
         return returnValue;
     }
 
+    private boolean isTestProfileActive() {
+        return Set.of(env.getActiveProfiles()).contains("test");
+    }
+
     /* 설명. Mono는 아무 데이터도 반환하지 않고, 비동기적으로 완료됨을 나타내는 반환 타입 */
     private Mono<Void> onError(ServerWebExchange exchange, String errorMessage, HttpStatus httpStatus) {
 
@@ -97,6 +107,5 @@ public class AuthorizationHeaderFilter
 
         return response.setComplete();
     }
-
 
 }
