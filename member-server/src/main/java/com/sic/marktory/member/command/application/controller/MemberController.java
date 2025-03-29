@@ -6,8 +6,6 @@ import com.sic.marktory.member.command.application.dto.MemberDTO;
 import com.sic.marktory.member.command.application.service.MailService;
 import com.sic.marktory.member.command.application.service.MemberService;
 import com.sic.marktory.member.command.domain.aggregate.vo.*;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.sic.marktory.common.exception.NickNameException;
 import com.sic.marktory.common.exception.TokenAlreadyVerifiedException;

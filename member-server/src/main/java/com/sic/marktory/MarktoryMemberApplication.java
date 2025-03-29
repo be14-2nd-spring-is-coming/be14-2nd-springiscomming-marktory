@@ -7,10 +7,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 //
 @SpringBootApplication
 @EnableDiscoveryClient
-public class Be142ndSpringiscommingMarktoryApplication {
+public class MarktoryMemberApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Be142ndSpringiscommingMarktoryApplication.class, args);
+        SpringApplication.run(MarktoryMemberApplication.class, args);
     }
 
 }

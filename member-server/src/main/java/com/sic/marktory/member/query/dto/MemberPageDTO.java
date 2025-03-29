@@ -2,8 +2,6 @@ package com.sic.marktory.member.query.dto;
 
 import lombok.*;
 
-import java.time.LocalDateTime;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter

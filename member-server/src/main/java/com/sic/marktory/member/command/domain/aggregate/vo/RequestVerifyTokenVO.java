@@ -2,8 +2,6 @@ package com.sic.marktory.member.command.domain.aggregate.vo;
 
 import lombok.*;
 
-import java.time.LocalDateTime;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

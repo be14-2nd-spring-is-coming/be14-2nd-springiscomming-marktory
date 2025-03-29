@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 /* 설명. 로그인에 사용된 Service 사용 */
 
 import java.security.Key;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;

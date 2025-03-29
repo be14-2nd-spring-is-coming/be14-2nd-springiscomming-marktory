@@ -2,7 +2,6 @@ package com.sic.marktory;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.servers.Server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -20,10 +19,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 )
 @SpringBootApplication
 @EnableDiscoveryClient
-public class Be142ndSpringiscommingMarktoryApplication {
+public class MarktoryMainApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Be142ndSpringiscommingMarktoryApplication.class, args);
+        SpringApplication.run(MarktoryMainApplication.class, args);
     }
 
 }

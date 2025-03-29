@@ -2,7 +2,6 @@ package com.sic.marktory.member_template.query.mapper;
 
 import com.sic.marktory.member_template.query.dto.MemberTemplateDTO;
 import org.junit.jupiter.api.Test;
-import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
