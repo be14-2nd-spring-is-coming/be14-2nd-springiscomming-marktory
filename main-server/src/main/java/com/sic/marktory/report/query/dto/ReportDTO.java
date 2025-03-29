@@ -19,5 +19,7 @@ public class ReportDTO {
     private Long postId;
     private Long commentId;
     private Long templateId;
+    private String name;
+    private Long reportCount;
 
 }

@@ -13,4 +13,5 @@ public interface ReportMapper {
 
     List<ReportDTO> selectReportedWriterId(@Param("type") String type);
 
+    List<ReportDTO> selectReportedMemberId();
 }

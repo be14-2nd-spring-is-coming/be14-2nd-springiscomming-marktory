@@ -26,4 +26,8 @@ public class ReportService {
     public List<ReportDTO> findReportedWriterId(String type) {
         return reportMapper.selectReportedWriterId(type);
     }
-}
+
+    // 신고 누적 횟수 3번 이상의 회원들 조회
+    public List<ReportDTO> findReportedMemberId() { return reportMapper.selectReportedMemberId(); }
+    }
+
