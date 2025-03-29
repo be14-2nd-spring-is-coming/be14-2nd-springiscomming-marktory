@@ -7,6 +7,7 @@ import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Component
+@Profile("!test")
 public class JwtUtil {
 
     private final Key key;     // 의존성 주입

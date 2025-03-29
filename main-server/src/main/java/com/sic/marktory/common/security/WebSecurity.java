@@ -73,7 +73,7 @@ public class WebSecurity {
 
         /* 설명. 로그인 이후 사용자가 들고 온 (request header에 발급받은 bearer 토큰을 들고 옴)
             토큰을 검증하기 위한 필터 */
-        http.addFilterBefore(new JwtFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new JwtFilter(jwtUtil, env), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 }
